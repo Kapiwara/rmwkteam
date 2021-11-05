@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "444241990614",
+    "project_id": "hairdresser-58022",
+    "storage_bucket": "hairdresser-58022.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:444241990614:android:01c38e8070fd539b284a77",
+        "android_client_info": {
+          "package_name": "com.example.barberqueue"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "444241990614-ir8h0sfuk0kkcksdjb3al4gf1j8kau4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD66dQMA6xhVm7WRwHCZ5nNvwzWgi5tnSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "444241990614-ir8h0sfuk0kkcksdjb3al4gf1j8kau4i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
