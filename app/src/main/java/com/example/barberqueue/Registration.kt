@@ -1,25 +1,32 @@
 package com.example.barberqueue
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.app.Activity
 import android.content.Intent
+import com.example.petcare.db.User
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.auth.AuthResult
+
+
+
+
+
 
 
 
 class Registration : AppCompatActivity() {
 
-    private lateinit var auth: FirebaseAuth;
+    private lateinit var mAuth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -28,7 +35,7 @@ class Registration : AppCompatActivity() {
         val editEmail = findViewById<EditText>(R.id.signup_email)
         val editPassword = findViewById<EditText>(R.id.signup_password)
         val signUpButton= findViewById<Button>(R.id.sign_up_btn1)
-        auth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance()
 
 
         signUpButton.setOnClickListener{
@@ -43,24 +50,52 @@ class Registration : AppCompatActivity() {
 
 
 
-    fun createUser(email:String, password:String){
-        auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d("task msg", "createUserWithEmail:success")
-                    val user = auth.currentUser
-                    var intent = Intent(this,MainActivity::class.java);
-                    startActivity(intent);
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("task msg", "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    //updateUI(null)
-                }
-            }
+    private fun createUser(email:String, password:String){
+        if (email.isEmpty() || password.isEmpty() )
+        {
+            Toast.makeText(this, "No blank space allowed!", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else if (password.length < 7 )
+        {
+            Toast.makeText(this, "Password must be at least 7 characters long ", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else if ( !email.contains("@"))
+        {
+            Toast.makeText(this, "Wrong email format", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, this::handleRegistration)
+
+    }
+
+    private fun addUserToDb(email :String, uid: String){
+        val db = FirebaseFirestore.getInstance()
+        db.collection("Users").add(User(uid, email))
+            .addOnCompleteListener(this, this::handleDbResult)
+    }
+
+    private fun handleDbResult(documentReferenceTask: Task<DocumentReference>) {
+        if (documentReferenceTask.isSuccessful) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        } else {
+            mAuth.currentUser?.delete()
+            Toast.makeText(this, "Error:" + documentReferenceTask.exception, Toast.LENGTH_SHORT)
+                .show()
+        }
+    }
+    private fun handleRegistration(authResultTask: Task<AuthResult>) {
+        if (authResultTask.isSuccessful && mAuth.currentUser != null) {
+            addUserToDb(mAuth.currentUser!!.email.toString(), mAuth.currentUser!!.uid.toString())
+        } else {
+            Toast.makeText(this, "Error:" + authResultTask.exception, Toast.LENGTH_SHORT).show()
+        }
     }
 
 
-
 }
+
