@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Registration"></activity>
-        <activity android:name=".UserAccount"></activity>
+        <activity android:name=".Dashboard"></activity>
     </application>
 
 </manifest>
