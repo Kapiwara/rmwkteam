@@ -30,9 +30,9 @@ class ChangePassword : AppCompatActivity(){
         val newPassword = findViewById<EditText>(R.id.change_pass)
         val newPassword2 = findViewById<EditText>(R.id.change_pass_2)
 
-        if(newPassword.text.isNotEmpty() && newPassword2.text.isNotEmpty() && oldPassword.text.isNotEmpty()){
 
-            if(newPassword2.text.toString() == newPassword.text.toString()){
+
+            if(dataValidation(newPassword.text.toString(),newPassword2.text.toString())){
                 val user = auth.currentUser
 
                 if (user != null && user.email != null){
@@ -65,17 +65,33 @@ class ChangePassword : AppCompatActivity(){
                     openActivityMainActivity()
                 }
             }
-            else{
-                Toast.makeText(this, "Password mismatching", Toast.LENGTH_SHORT).show()
-            }
-        }
-        else{
-            Toast.makeText(this, "Fill blank spaces", Toast.LENGTH_SHORT).show()
-        }
+        
     }
 
     private fun openActivityMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent);
+    }
+
+    private fun  dataValidation(password: String, passwordRpt : String) : Boolean{
+        if(password.isNotEmpty() && passwordRpt.isNotEmpty()){
+
+            if(password.length < 7) {
+                Toast.makeText(this, "Password must be at least 7 characters long ", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            if(password != passwordRpt){
+                Toast.makeText(this, "Passwords must be identical", Toast.LENGTH_SHORT).show()
+                return false
+            }
+
+        }
+        else{
+            Toast.makeText(this, "No blank spaces allowed!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        return true
+
     }
 }
