@@ -38,9 +38,7 @@ class Registration : AppCompatActivity() {
                 if(dataValidation(editEmail.text.toString(),editPassword.text.toString(),editPassword2.text.toString())) {
                         createUser(editEmail.text.trim().toString(),editPassword.text.trim().toString())
                     }
-            /*}else{
-                Toast.makeText(this,"Wypełnij wszystkie pola",Toast.LENGTH_LONG).show()
-            }*/
+
             }
         }
     }
@@ -75,7 +73,7 @@ class Registration : AppCompatActivity() {
     }
     private fun handleRegistration(authResultTask: Task<AuthResult>) {
         if (authResultTask.isSuccessful && mAuth.currentUser != null) {
-            addUserToDb(mAuth.currentUser!!.email.toString(), mAuth.currentUser!!.uid.toString())
+            addUserToDb(mAuth.currentUser!!.email.toString(), mAuth.currentUser!!.uid)
         } else {
             Toast.makeText(this, "Error:" + authResultTask.exception, Toast.LENGTH_SHORT).show()
         }

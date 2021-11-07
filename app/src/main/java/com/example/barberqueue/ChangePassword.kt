@@ -44,7 +44,7 @@ class ChangePassword : AppCompatActivity(){
 
                             if (it.isSuccessful) {
                                 Toast.makeText(this, "Re-authentication success", Toast.LENGTH_SHORT).show()
-                                user!!.updatePassword(newPassword.text.toString())
+                                user.updatePassword(newPassword.text.toString())
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
                                             Toast.makeText(this, "Password changed successfully", Toast.LENGTH_SHORT).show()
@@ -56,21 +56,27 @@ class ChangePassword : AppCompatActivity(){
                             }
                             else{
 
-                                Toast.makeText(this, "Re-authentication failed", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show()
                             }
                         }
 
                 }
                 else{
-                    openActivityMainActivity()
+                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+                    openActivityDashboard()
                 }
             }
-        
+
     }
 
     private fun openActivityMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent);
+        startActivity(intent)
+    }
+
+    private fun openActivityDashboard() {
+        val intent = Intent(this, Dashboard::class.java)
+        startActivity(intent)
     }
 
     private fun  dataValidation(password: String, passwordRpt : String) : Boolean{

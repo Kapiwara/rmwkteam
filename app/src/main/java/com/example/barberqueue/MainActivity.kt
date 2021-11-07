@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import com.google.firebase.auth.FirebaseAuth
 import android.content.Intent
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
                 loginUser(loginEmail.text.trim().toString(),loginPassword.text.trim().toString())
             }
             else{
-                Toast.makeText(this,"Wypełnij wszystkie pola",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"No blank spaces allowed",Toast.LENGTH_LONG).show()
             }
         }
 
@@ -45,15 +44,10 @@ class MainActivity : AppCompatActivity() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d("task", "signInWithEmail:success")
-                    val user = auth.currentUser
                     Toast.makeText(baseContext, "Authentication succeeded.",
                         Toast.LENGTH_SHORT).show()
-                    openActivityUser();
+                    openActivityUser()
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w("task", "signInWithEmail:failure", task.exception)
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
 

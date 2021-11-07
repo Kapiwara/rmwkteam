@@ -16,6 +16,6 @@ class AccountManagement : AppCompatActivity(){
 
     private fun openActivityChangePassword() {
         val intent = Intent(this, ChangePassword::class.java)
-        startActivity(intent);
+        startActivity(intent)
     }
 }
