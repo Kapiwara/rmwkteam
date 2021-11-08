@@ -10,7 +10,7 @@
 
 
     <EditText
-        android:id="@+id/login_email"
+        android:id="@+id/login_email_mgmt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="email"
@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="0.056" />
 
     <EditText
-        android:id="@+id/login_password"
+        android:id="@+id/login_password_mgmt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="password"
@@ -38,21 +38,10 @@
         app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent" />
     <Button
-        android:id="@+id/log_in_btn"
+        android:id="@+id/log_in_mgmt_btn"
         android:text="log in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         ></Button>
-    <Button
-        android:id="@+id/sign_up_btn"
-        android:text="new user"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></Button>
-    <Button
-        android:id="@+id/mgmt_btn"
-        android:text="management panel"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></Button>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

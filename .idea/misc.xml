@@ -3,13 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/layout/acc_management.xml" value="0.1" />
         <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/layout/activity_main.xml" value="0.13020833333333334" />
-        <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/layout/change_email.xml" value="0.22418478260869565" />
-        <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/layout/change_password.xml" value="0.22418478260869565" />
-        <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/layout/dashboard.xml" value="0.15670289855072464" />
         <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/layout/logged_in.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/layout/registration.xml" value="0.13020833333333334" />
+        <entry key="app/src/main/res/layout/activity_admin_login.xml" value="0.23596014492753623" />
+        <entry key="app/src/main/res/layout/activity_admin_login_panel.xml" value="0.23596014492753623" />
+        <entry key="app/src/main/res/layout/activity_admin_panel.xml" value="0.23596014492753623" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/logged_in.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/registration.xml" value="0.625" />
       </map>
     </option>
   </component>

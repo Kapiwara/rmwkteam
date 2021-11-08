@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Barberqueue">
         <activity
+            android:name=".AdminLoginPanel"
+            android:exported="false" />
+        <activity
+            android:name=".AdminLogin"
+            android:exported="false" />
+        <activity
+            android:name=".AdminPanel"
+            android:exported="false" />
+        <activity
+            android:name=".db.AdminLogin"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -18,11 +30,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Registration"></activity>
-        <activity android:name=".Dashboard"></activity>
-        <activity android:name=".AccountManagement"></activity>
-        <activity android:name=".ChangePassword"></activity>
-
+        <activity android:name=".Registration" />
+        <activity android:name=".Dashboard" />
+        <activity android:name=".AccountManagement" />
+        <activity android:name=".ChangePassword" />
     </application>
 
 </manifest>
