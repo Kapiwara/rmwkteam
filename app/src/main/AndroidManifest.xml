@@ -13,13 +13,7 @@
             android:name=".AdminLoginPanel"
             android:exported="false" />
         <activity
-            android:name=".AdminLogin"
-            android:exported="false" />
-        <activity
             android:name=".AdminPanel"
-            android:exported="false" />
-        <activity
-            android:name=".db.AdminLogin"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -34,6 +28,9 @@
         <activity android:name=".Dashboard" />
         <activity android:name=".AccountManagement" />
         <activity android:name=".ChangePassword" />
+        <activity android:name=".Menu" />
+        <activity android:name=".Right" />
+
     </application>
 
 </manifest>

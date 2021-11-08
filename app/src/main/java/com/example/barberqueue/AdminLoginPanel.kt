@@ -1,32 +1,32 @@
 package com.example.barberqueue
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.barberqueue.databinding.ActivityAdminLoginPanelBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
 
-
 class AdminLoginPanel : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ActivityAdminLoginPanelBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin_login_panel)
+        //setContentView(R.layout.activity_admin_login_panel)
+        setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
-        val loginButton = findViewById<Button>(R.id.log_in_mgmt_btn)
-        val loginEmail = findViewById<EditText>(R.id.login_email_mgmt)
-        val loginPassword = findViewById<EditText>(R.id.login_password_mgmt)
+        //val loginButton = findViewById<Button>(R.id.log_in_mgmt_btn)
+        //val loginEmail = findViewById<EditText>(R.id.login_email_mgmt)
+        //val loginPassword = findViewById<EditText>(R.id.login_password_mgmt)
 
-        loginButton.setOnClickListener {
-            if(loginEmail.text.trim().toString().isNotEmpty() || loginPassword.text.trim().toString().isNotEmpty()){
-                loginAdmin(loginEmail.text.trim().toString(),loginPassword.text.trim().toString())
+        binding.logInMgmtBtn.setOnClickListener {
+            if(binding.loginEmailMgmt.text.trim().toString().isNotEmpty() || binding.loginPasswordMgmt.text.trim().toString().isNotEmpty()){
+                loginAdmin(binding.loginEmailMgmt.text.trim().toString(),binding.loginPasswordMgmt.text.trim().toString())
             }
             else{
                 Toast.makeText(this,"No blank spaces allowed", Toast.LENGTH_LONG).show()

@@ -1,4 +1,4 @@
-package com.example.petcare.db
+package com.example.barberqueue.db
 
 class User {
     val id: String

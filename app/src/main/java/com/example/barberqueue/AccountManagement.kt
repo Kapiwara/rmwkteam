@@ -2,16 +2,19 @@ package com.example.barberqueue
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.example.barberqueue.databinding.AccManagementBinding
 
 class AccountManagement : AppCompatActivity(){
+    private lateinit var binding: AccManagementBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.acc_management)
-        val changePasswordButton = findViewById<Button>(R.id.change_pass_btn)
-        changePasswordButton.setOnClickListener{ openActivityChangePassword() }
+
+        binding = AccManagementBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //val changePasswordButton = findViewById<Button>(R.id.change_pass_btn)
+        binding.changePassBtn.setOnClickListener{ openActivityChangePassword() }
     }
 
     private fun openActivityChangePassword() {

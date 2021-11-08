@@ -1,12 +1,11 @@
 package com.example.barberqueue
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.Button
-import com.google.firebase.auth.FirebaseAuth
 import android.content.Intent
-import android.widget.EditText
+import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.barberqueue.databinding.ActivityMainBinding
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -14,7 +13,7 @@ import com.google.firebase.ktx.Firebase
 class MainActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
-
+    private lateinit var binding: ActivityMainBinding
 
 
 
@@ -22,18 +21,20 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val signupButton = findViewById<Button>(R.id.sign_up_btn)
-        val loginButton = findViewById<Button>(R.id.log_in_btn)
-        val loginEmail = findViewById<EditText>(R.id.login_email)
-        val loginPassword = findViewById<EditText>(R.id.login_password)
-        val mgmtBtn = findViewById<Button>(R.id.mgmt_btn)
+        //setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //val signupButton = findViewById<Button>(R.id.sign_up_btn)
+        //val loginButton = findViewById<Button>(R.id.log_in_btn)
+        //val loginEmail = findViewById<EditText>(R.id.login_email)
+        //val loginPassword = findViewById<EditText>(R.id.login_password)
+        //val mgmtBtn = findViewById<Button>(R.id.mgmt_btn)
         auth = FirebaseAuth.getInstance()
-        signupButton.setOnClickListener { openActivityRegistration() }
-        mgmtBtn.setOnClickListener { openActivityManage() }
-        loginButton.setOnClickListener {
-            if(loginEmail.text.trim().toString().isNotEmpty() || loginPassword.text.trim().toString().isNotEmpty()){
-                loginUser(loginEmail.text.trim().toString(),loginPassword.text.trim().toString())
+        binding.signUpBtn.setOnClickListener { openActivityRegistration() }
+        binding.mgmtBtn.setOnClickListener { openActivityManage() }
+        binding.logInBtn.setOnClickListener {
+            if(binding.loginEmail.text.trim().toString().isNotEmpty() || binding.loginPassword.text.trim().toString().isNotEmpty()){
+                loginUser(binding.loginEmail.text.trim().toString(),binding.loginPassword.text.trim().toString())
             }
             else{
                 Toast.makeText(this,"No blank spaces allowed",Toast.LENGTH_LONG).show()

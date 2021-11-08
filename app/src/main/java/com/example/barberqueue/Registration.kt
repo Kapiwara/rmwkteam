@@ -1,46 +1,44 @@
 package com.example.barberqueue
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import android.content.Intent
-import com.example.petcare.db.User
-import com.google.firebase.auth.FirebaseAuth
+import com.example.barberqueue.databinding.RegistrationBinding
+import com.example.barberqueue.db.User
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.auth.AuthResult
-
-
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class Registration : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var binding: RegistrationBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.registration)
-        val editEmail = findViewById<EditText>(R.id.signup_email)
-        val editPassword = findViewById<EditText>(R.id.signup_password)
-        val editPassword2 = findViewById<EditText>(R.id.signup_password_rpt)
-        val signUpButton= findViewById<Button>(R.id.sign_up_btn1)
+        binding = RegistrationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //val editEmail = findViewById<EditText>(R.id.signup_email)
+        //val editPassword = findViewById<EditText>(R.id.signup_password)
+        //val editPassword2 = findViewById<EditText>(R.id.signup_password_rpt)
+        //val signUpButton= findViewById<Button>(R.id.sign_up_btn1)
         mAuth = FirebaseAuth.getInstance()
 
 
-        signUpButton.setOnClickListener{
-            if(editEmail.text.trim().toString().isNotEmpty() || editPassword.text.trim().toString().isNotEmpty()){
+        binding.signUpBtn1.setOnClickListener{
 
-                if(dataValidation(editEmail.text.toString(),editPassword.text.toString(),editPassword2.text.toString())) {
-                        createUser(editEmail.text.trim().toString(),editPassword.text.trim().toString())
+                if(dataValidation(binding.signupEmail.text.toString(),binding.signupPassword.text.toString(),binding.signupPasswordRpt.text.toString())) {
+                        createUser(binding.signupEmail.text.trim().toString(),binding.signupPassword.text.trim().toString())
                     }
 
             }
-        }
+
     }
 
 

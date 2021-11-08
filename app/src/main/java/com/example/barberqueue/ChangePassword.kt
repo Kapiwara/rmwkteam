@@ -2,24 +2,26 @@ package com.example.barberqueue
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.barberqueue.databinding.ChangePasswordBinding
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 
 class ChangePassword : AppCompatActivity(){
     private lateinit var auth: FirebaseAuth
+    private lateinit var binding: ChangePasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.change_password)
-        val submitPassword = findViewById<Button>(R.id.submit_pass_btn)
+        binding = ChangePasswordBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //val submitPassword = findViewById<Button>(R.id.submit_pass_btn)
         auth = FirebaseAuth.getInstance()
 
 
-        submitPassword.setOnClickListener {
+        binding.submitPassBtn.setOnClickListener {
              changePassword()
 
         }

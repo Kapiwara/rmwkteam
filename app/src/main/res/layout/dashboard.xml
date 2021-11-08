@@ -8,24 +8,22 @@
     android:orientation="vertical">
 
 
-
-<TextView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:textAlignment="center"
-    android:text="HELLO USER"></TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="HELLO USER" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="account management"
-        android:id="@+id/acc_mng_btn"
-        ></Button>
+        android:id="@+id/acc_mng_btn" />
+
     <Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="logout"
-    android:id="@+id/logout_btn"
-    ></Button>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="logout"
+        android:id="@+id/logout_btn" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
