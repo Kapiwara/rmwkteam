@@ -2,6 +2,7 @@ package com.example.barberqueue
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import com.example.barberqueue.databinding.DashboardBinding
@@ -47,14 +48,20 @@ class Dashboard : AppCompatActivity(){
             MotionEvent.ACTION_UP -> {
                 x2 = touchEvent.x
                 y2 = touchEvent.y
-                if(x1 < x2){
+                if(x1 < x2 && y1 <= y2+100 && y1 >= y2-100){
                     openActivityMenu()
+                    Log.e("position", "$x1,$y1     $x2,$y2")
                 }
-                else if(x1 > x2){
+                else if(x1 > x2 && y1 <= y2+100 && y1 >= y2-100){
                     openActivitySTH()
+                    Log.e("position", "$x1,$y1     $x2,$y2")
                 }
+                else {
+                    Log.e("position", "nothing happens hehe")
+                }
+
             }
-                }
+        }
 
 
         return false
