@@ -33,11 +33,11 @@ class Registration : AppCompatActivity() {
 
         binding.signUpBtn1.setOnClickListener{
 
-                if(dataValidation(binding.signupEmail.text.toString(),binding.signupPassword.text.toString(),binding.signupPasswordRpt.text.toString())) {
-                        createUser(binding.signupEmail.text.trim().toString(),binding.signupPassword.text.trim().toString())
-                    }
-
+            if(dataValidation(binding.signupEmail.text.toString(),binding.signupPassword.text.toString(),binding.signupPasswordRpt.text.toString())) {
+                createUser(binding.signupEmail.text.trim().toString(),binding.signupPassword.text.trim().toString())
             }
+
+        }
 
     }
 

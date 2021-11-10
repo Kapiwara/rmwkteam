@@ -3,27 +3,77 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
+    android:background="@drawable/main_theme_background_gradient"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="HELLO USER" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="@color/amarant"
+        android:padding="20dp"
+        >
 
-    <Button
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="account management"
+            android:background="@drawable/button_design_1"
+            android:textColor="@color/white"
+            android:fontFamily="@font/lato_bold"
+            android:id="@+id/acc_mng_btn"
+            android:layout_weight="1"
+            android:textSize="10dp"
+            android:layout_marginRight="20dp">
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="App Name"
+            android:fontFamily="@font/lato_bold"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:layout_weight="1"/>
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_design_1"
+            android:textSize="10dp"
+            android:fontFamily="@font/lato_bold"
+            android:layout_marginLeft="20dp"
+            android:text="logout"
+            android:textColor="@color/white"
+            android:id="@+id/logout_btn"
+            android:layout_weight="1">
+        </androidx.appcompat.widget.AppCompatButton>
+
+    </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/navigation_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="account management"
-        android:id="@+id/acc_mng_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/llMainInfoAddSubject"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerviewListOfAllForms"
+        android:background="@color/white">
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="appointments"/>
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New visit"/>
+    </com.google.android.material.tabs.TabLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="logout"
-        android:id="@+id/logout_btn" />
+
+
 
 </androidx.appcompat.widget.LinearLayoutCompat>

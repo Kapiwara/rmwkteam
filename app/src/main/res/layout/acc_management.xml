@@ -2,13 +2,18 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_theme_background_gradient"
     android:orientation="vertical">
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="20dp"
         android:text="CHANGE PASSWORD"
         android:id="@+id/change_pass_btn"
-        ></Button>
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/white"
+        android:background="@drawable/button_design_1"
+        ></androidx.appcompat.widget.AppCompatButton>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
