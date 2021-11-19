@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.example.barberqueue.databinding.DashboardBinding
+import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -17,11 +20,44 @@ class Dashboard : AppCompatActivity(){
     private var y2: Float = 0F
 
     private lateinit var binding: DashboardBinding
+    private lateinit var mViewPager: ViewPager
+    private lateinit var mPagerAdapter: PagerAdapter
+    private lateinit var tabLayout: TabLayout
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         binding = DashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mViewPager = findViewById(R.id.viewpager_dashboard)       // te wszystkie pagery to sa do tego zeby w activity dashboard byly fragmenty appointments i new visit
+
+        mPagerAdapter = ViewPagerAdapter(supportFragmentManager)
+        mViewPager.adapter = mPagerAdapter
+        mViewPager.offscreenPageLimit = 2
+
+
+        mViewPager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                changingTabs(position)
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+        })
+        mViewPager.currentItem = 0
+        tabLayout = findViewById(R.id.navigation_menu)
+        tabLayout.setupWithViewPager(mViewPager)
         //val accMngBtn = findViewById<Button>(R.id.acc_mng_btn)
         //val logoutBtn = findViewById<Button>(R.id.logout_btn)
 
@@ -35,7 +71,17 @@ class Dashboard : AppCompatActivity(){
 
     }
 
-//funkcja do poruszania sie po ui w poziomie
+    private fun changingTabs(position: Int) {
+
+        if(position == 0){
+
+        }
+        if(position == 1){
+
+        }
+    }
+
+    //funkcja do poruszania sie po ui w poziomie
     override fun onTouchEvent(touchEvent : MotionEvent): Boolean {
 
         when(touchEvent.action) {
@@ -82,6 +128,8 @@ class Dashboard : AppCompatActivity(){
         val intent = Intent(this, Right::class.java)
         startActivity(intent)
     }
+
+
 
 
 
