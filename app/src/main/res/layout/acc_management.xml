@@ -15,5 +15,25 @@
         android:textColor="@color/white"
         android:background="@drawable/button_design_1"
         ></androidx.appcompat.widget.AppCompatButton>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="CHANGE EMAIL"
+        android:id="@+id/change_email_btn"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/white"
+        android:background="@drawable/button_design_1"
+        ></androidx.appcompat.widget.AppCompatButton>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="DELETE ACCOUNT"
+        android:id="@+id/delete_acc_btn"
+        android:fontFamily="@font/lato_bold"
+        android:textColor="@color/white"
+        android:background="@drawable/button_design_1"
+        ></androidx.appcompat.widget.AppCompatButton>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

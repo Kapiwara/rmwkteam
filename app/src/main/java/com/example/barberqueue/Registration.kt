@@ -45,9 +45,6 @@ class Registration : AppCompatActivity() {
 
     private fun createUser(email:String, password:String){
 
-
-
-
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, this::handleRegistration)
 
