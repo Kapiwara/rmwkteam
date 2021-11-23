@@ -18,13 +18,35 @@
         <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/layout/registration.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/menu/activity_main_drawer.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/48669/git/rmwkteam/app/src/main/res/menu/main.xml" value="0.18854166666666666" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/button_design_1.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/edittext_design_1.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/ic_baseline_face_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/ic_baseline_power_settings_new_24.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/ic_logo4hair.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/ic_logo4hair_background.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/layout_background_1.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/drawable/main_theme_background_gradient.xml" value="0.3828125" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/acc_management.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/activity_admin_login_panel.xml" value="0.24003623188405798" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/activity_admin_panel.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/activity_change_email.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/activity_main.xml" value="0.2441123188405797" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/activity_menu.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/activity_right.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/change_email.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/change_password.xml" value="0.3555253623188406" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/dashboard.xml" value="0.25" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/fragment_appointments.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/fragment_new_visit.xml" value="0.35144927536231885" />
+        <entry key="..\:/Users/radek/AndroidStudioProjects/rmwkteam1/app/src/main/res/layout/registration.xml" value="0.2441123188405797" />
         <entry key="app/src/main/res/layout/acc_management.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/activity_change_email.xml" value="0.22780797101449277" />
         <entry key="app/src/main/res/layout/fragment_new_visit.xml" value="0.22327898550724637" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

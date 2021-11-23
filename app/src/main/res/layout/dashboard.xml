@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,71 +8,101 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
         android:background="@color/amarant"
+        android:gravity="center"
+        android:orientation="horizontal"
         android:padding="20dp"
-        >
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="account management"
-            android:background="@drawable/button_design_1"
-            android:textColor="@color/white"
-            android:fontFamily="@font/lato_bold"
+        <ImageButton
             android:id="@+id/acc_mng_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="20dp"
             android:layout_weight="1"
-            android:textSize="10dp"
-            android:layout_marginRight="20dp">
-        </androidx.appcompat.widget.AppCompatButton>
+            android:background="@drawable/button_design_1"
+            android:fontFamily="@font/lato_bold"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_baseline_settings_24"
+            android:textColor="@color/white"
+            android:textSize="10dp"></ImageButton>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:fontFamily="@font/lato_bold"
+            android:src="@drawable/ic_logo4hair"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+
+        <ImageButton
+            android:id="@+id/logout_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_design_1"
+            android:fontFamily="@font/lato_bold"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:src="@drawable/ic_baseline_power_settings_new_24"
+            android:textColor="@color/white"
+            android:textSize="10dp"></ImageButton>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/add_new_visit_btn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="App Name"
-            android:fontFamily="@font/lato_bold"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            android:layout_weight="1"/>
+            android:background="@color/white"
+            android:textColor="@color/cream"
+            android:gravity="center"
+            android:padding="20dp"
+            android:text="Appointments"
+            android:textSize="20dp" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_design_1"
-            android:textSize="10dp"
-            android:fontFamily="@font/lato_bold"
-            android:layout_marginLeft="20dp"
-            android:text="logout"
-            android:textColor="@color/white"
-            android:id="@+id/logout_btn"
-            android:layout_weight="1">
-        </androidx.appcompat.widget.AppCompatButton>
 
     </LinearLayout>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/navigation_menu"
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_new_visit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/llMainInfoAddSubject"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerviewListOfAllForms"
-        android:background="@color/white"/>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager_dashboard"
-        app:layout_constraintTop_toBottomOf="@+id/navigation_menu"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/button_design_1"
+        android:layout_margin="20dp"
+        android:text="+ Add new visit"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:padding="15dp"
+        android:textSize="15dp"/>
 
 
 
 
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

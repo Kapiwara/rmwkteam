@@ -39,9 +39,15 @@ class Registration : AppCompatActivity() {
 
         }
 
+        binding.logInBtn1.setOnClickListener { openActivityLogin()}
+
     }
 
 
+    private fun openActivityLogin() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+    }
 
     private fun createUser(email:String, password:String){
 
