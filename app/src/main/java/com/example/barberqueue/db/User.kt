@@ -1,17 +1,6 @@
 package com.example.barberqueue.db
 
-class User {
-    val id: String
-    val login: String
+import java.io.Serializable
 
-    constructor(id: String, login: String) {
-        this.id = id
-        this.login = login
-    }
-
-    constructor() {
-        id = ""
-        login = ""
-    }
-
+data class User(val login: String = "", val name: String ="", val phone: String =""): Serializable {
 }

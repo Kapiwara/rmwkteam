@@ -75,4 +75,11 @@ class AccountManagement : AppCompatActivity(){
         val intent = Intent(this, ChangeEmail::class.java)
         startActivity(intent)
     }
+
+    /*val bottomSheetFragment = DialogEditProfile()
+
+    private fun openDialogChangeProfileData() {
+        bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
+    }
+    */
 }
