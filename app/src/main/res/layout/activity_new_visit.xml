@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/linearLayout_services"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_haircut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="Haircut" />
+
+
+
+                <CheckBox
+                    android:id="@+id/checkBox_women_haircut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_men_haircut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_hair_coloring"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hair coloring" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_coloring_and_haircut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_coloring_more_than_1_color"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_decolorization"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_hair_care"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hair care" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_hair_care_treatments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_washing_and_hair_styling"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Other" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_fringe_trimming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+                <CheckBox
+                    android:id="@+id/checkBox_beard_trimming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_prices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView_pricing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="23dp"
+                    android:text="Pricing" />
+
+
+
+
+
+                <TextView
+                    android:id="@+id/textView_women_haircut_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_men_haircut_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="55dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_coloring_and_haircut_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_coloring_more_than_1_color_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="30dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_decolorization_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="55dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_hair_care_treatments_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_washing_and_hair_styling_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="65dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_fringe_trimming_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="25dp"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/textView_beard_trimming_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:text="" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textView_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:text="Choose services for your new visit"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
