@@ -61,10 +61,10 @@
             android:hint="Enter your e-mail"
             android:inputType="textPassword"
             android:paddingLeft="20dp"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingRight="20dp"
-            android:paddingBottom="15dp"
-            android:textColor="@color/white"
+            android:paddingBottom="10dp"
+            android:textColor="@color/grey"
             android:textColorHint="@color/light_grey"
             android:textSize="15dp" />
 
@@ -72,7 +72,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="40dp"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/lato_bold"
@@ -92,10 +92,10 @@
             android:hint="Enter your password"
             android:inputType="textPassword"
             android:paddingLeft="20dp"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingRight="20dp"
-            android:paddingBottom="15dp"
-            android:textColor="@color/white"
+            android:paddingBottom="10dp"
+            android:textColor="@color/grey"
             android:textColorHint="@color/light_grey"
             android:textSize="15dp" />
 

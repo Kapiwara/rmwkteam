@@ -14,15 +14,19 @@ import com.google.android.gms.tasks.Task
 
 import androidx.annotation.NonNull
 import androidx.appcompat.app.AlertDialog
+import com.example.barberqueue.db.User
 
 import com.google.android.gms.tasks.OnCompleteListener
-
-
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class AccountManagement : AppCompatActivity(){
     private lateinit var binding: AccManagementBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+
+    lateinit var obj: User
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = AccManagementBinding.inflate(layoutInflater)
@@ -33,6 +37,20 @@ class AccountManagement : AppCompatActivity(){
         binding.changePassBtn.setOnClickListener{ openActivityChangePassword() }
         binding.changeEmailBtn.setOnClickListener{ openActivityChangeEmail() }
         binding.deleteAccBtn.setOnClickListener { deleteUser() }
+        binding.editProfileDataBtn.setOnClickListener{ openDialogChangeProfileData() }
+
+
+        db = FirebaseFirestore.getInstance()
+
+        val ref = auth.currentUser?.let { db.collection("Users").document(it.uid) }
+
+        ref?.addSnapshotListener { value, error ->
+            obj = value?.toObject(User::class.java)!!
+            binding.textViewName.text = obj.name
+            binding.textViewPhone.text = obj.phone
+        }
+
+
     }
 
     private fun deleteUser() {
@@ -76,10 +94,11 @@ class AccountManagement : AppCompatActivity(){
         startActivity(intent)
     }
 
-    /*val bottomSheetFragment = DialogEditProfile()
+
 
     private fun openDialogChangeProfileData() {
+        val bottomSheetFragment = DialogEditProfile(obj?.name.toString(), obj?.phone.toString())
         bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
     }
-    */
+
 }

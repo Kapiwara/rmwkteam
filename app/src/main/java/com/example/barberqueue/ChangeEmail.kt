@@ -38,6 +38,7 @@ class ChangeEmail : AppCompatActivity() {
                        auth.currentUser!!.updateEmail(binding.newEmail.getText().toString())
                            .addOnCompleteListener{ task ->
                                if (task.isSuccessful){
+                                   updateUserEmailToDb(binding.newEmail.getText().toString())
                                    Toast.makeText(getApplicationContext(),"Email updated", Toast.LENGTH_LONG).show();
                                    openActivityuserAcc();
                                }else{
@@ -62,6 +63,11 @@ class ChangeEmail : AppCompatActivity() {
     }
 
 
+    private fun updateUserEmailToDb(email :String){
+        val db = FirebaseFirestore.getInstance()
+        val userid = auth.currentUser?.uid
+        db.collection("Users").document(userid.toString()).update("login",email)
+    }
 
 
 

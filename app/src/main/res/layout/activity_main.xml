@@ -78,11 +78,11 @@
             android:fontFamily="@font/lato_bold"
             android:inputType="textEmailAddress"
             android:paddingLeft="20dp"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingRight="20dp"
-            android:paddingBottom="15dp"
-            android:textColor="@color/dark_grey"
-            android:textColorHint="@color/grey"
+            android:paddingBottom="10dp"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/light_grey"
             android:textSize="15dp" />
 
         <TextView
@@ -110,13 +110,14 @@
             android:hint="Enter your password"
             android:inputType="textPassword"
             android:paddingLeft="20dp"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingRight="20dp"
 
-            android:paddingBottom="15dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/grey"
+            android:paddingBottom="10dp"
+            android:textColor="@color/grey"
+            android:textColorHint="@color/light_grey"
             android:textSize="15dp" />
+        <!--
 
         <TextView
             android:layout_width="wrap_content"
@@ -129,6 +130,8 @@
             android:layout_marginRight="40dp"
             android:layout_marginTop="10dp"
             android:textSize="15dp" />
+
+            -->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/log_in_btn"
