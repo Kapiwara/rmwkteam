@@ -1,11 +1,15 @@
 package com.example.barberqueue
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.example.barberqueue.db.Service
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -29,8 +33,6 @@ class NewVisit : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_visit)
-        Log.e("abc", "dupka")
-
 
         val servicesList = mutableListOf<Service>()
         db = FirebaseFirestore.getInstance()
@@ -48,7 +50,7 @@ class NewVisit : AppCompatActivity() {
 
         val women = findViewById<CheckBox>(R.id.checkBox_women_haircut)
         val men = findViewById<CheckBox>(R.id.checkBox_men_haircut)
-        val coloringHaircut = findViewById<CheckBox>(R.id.checkBox_coloring_and_haircut)
+        val coloring = findViewById<CheckBox>(R.id.checkBox_coloring_and_haircut)
         val coloringColors = findViewById<CheckBox>(R.id.checkBox_coloring_more_than_1_color)
         val decolorization = findViewById<CheckBox>(R.id.checkBox_decolorization)
         val hairTreatment = findViewById<CheckBox>(R.id.checkBox_hair_care_treatments)
@@ -56,6 +58,9 @@ class NewVisit : AppCompatActivity() {
         val fringe = findViewById<CheckBox>(R.id.checkBox_fringe_trimming)
         val beard = findViewById<CheckBox>(R.id.checkBox_beard_trimming)
 
+        val chooseDate: Button = findViewById<Button>(R.id.choose_date_btn)
+        var priceSum: Float = 0F
+        var timeSum: Int = 0
 
         val ref = db.collection("Services")
         ref.get().addOnSuccessListener { services ->
@@ -77,7 +82,7 @@ class NewVisit : AppCompatActivity() {
 
                 women.text = servicesList[0].name.toString()
                 men.text = servicesList[1].name.toString()
-                coloringHaircut.text = servicesList[2].name.toString()
+                coloring.text = servicesList[2].name.toString()
                 coloringColors.text = servicesList[3].name.toString()
                 decolorization.text = servicesList[4].name.toString()
                 hairTreatment.text = servicesList[5].name.toString()
@@ -95,13 +100,150 @@ class NewVisit : AppCompatActivity() {
                 fringePrice.text = servicesList[7].price.toString()
                 beardPrice.text = servicesList[8].price.toString()
 
+
+                chooseDate.setOnClickListener {
+                    if (women.isChecked) {
+                        priceSum += womenPrice.text.toString().toFloat()
+                        timeSum += servicesList[0].time
+                    }
+                    if (men.isChecked) {
+                        priceSum += menPrice.text.toString().toFloat()
+                        timeSum += servicesList[1].time
+                    }
+                    if (coloring.isChecked) {
+                        priceSum += coloringPrice.text.toString().toFloat()
+                        timeSum += servicesList[2].time
+                    }
+                    if (coloringColors.isChecked) {
+                        priceSum += coloringColorsPrice.text.toString().toFloat()
+                        timeSum += servicesList[3].time
+                    }
+                    if (decolorization.isChecked) {
+                        priceSum += decolorizationPrice.text.toString().toFloat()
+                        timeSum += servicesList[4].time
+                    }
+                    if (hairTreatment.isChecked) {
+                        priceSum += hairTreatmentPrice.text.toString().toFloat()
+                        timeSum += servicesList[5].time
+                    }
+                    if (hairWash.isChecked) {
+                        priceSum += hairWashPrice.text.toString().toFloat()
+                        timeSum += servicesList[6].time
+                    }
+                    if (fringe.isChecked) {
+                        priceSum += fringePrice.text.toString().toFloat()
+                        timeSum += servicesList[7].time
+                    }
+                    if (beard.isChecked) {
+                        priceSum += beardPrice.text.toString().toFloat()
+                        timeSum += servicesList[8].time
+                    }
+
+                    if(priceSum <= 0){
+                        Toast.makeText(this, "Please choose at least 1 service", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        val intent = Intent (this,MakeAppointment::class.java).apply{
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        }
+                        intent.putExtra("priceSum", priceSum)
+                        intent.putExtra("timeSum", timeSum)
+
+                        startActivity(intent)
+                    }
+
+
+
+
+                }
+
             }
 
         }
 
 
+
+        women.setOnClickListener {
+            if (women.isChecked) {
+                men.isEnabled = false
+                fringe.isEnabled = false
+            } else {
+                men.isEnabled = true
+                fringe.isEnabled = true
+            }
+        }
+
+        men.setOnClickListener {
+            if (men.isChecked) {
+                women.isEnabled = false
+                fringe.isEnabled = false
+            } else {
+                women.isEnabled = true
+                fringe.isEnabled = true
+            }
+        }
+
+        coloring.setOnClickListener {
+            if (coloring.isChecked) {
+                coloringColors.isEnabled = false
+                decolorization.isEnabled = false
+            } else {
+                coloringColors.isEnabled = true
+                decolorization.isEnabled = true
+            }
+        }
+
+        coloringColors.setOnClickListener {
+            if (coloringColors.isChecked) {
+                coloring.isEnabled = false
+                decolorization.isEnabled = false
+            } else {
+                coloring.isEnabled = true
+                decolorization.isEnabled = true
+            }
+        }
+
+        decolorization.setOnClickListener {
+            if (decolorization.isChecked) {
+                coloring.isEnabled = false
+                coloringColors.isEnabled = false
+            } else {
+                coloring.isEnabled = true
+                coloringColors.isEnabled = true
+            }
+        }
+
+
+        fringe.setOnClickListener {
+            if (fringe.isChecked) {
+                women.isEnabled = false
+                men.isEnabled = false
+            } else {
+                women.isEnabled = true
+                men.isEnabled = true
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        openActivityDashboard()
+
     }
 
+    private fun openActivityDashboard() {
+        val intent = Intent(this,Dashboard::class.java)
+        startActivity(intent)
+    }
 
 }
 

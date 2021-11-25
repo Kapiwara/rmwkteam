@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Barberqueue">
         <activity
+            android:name=".MakeAppointment"
+            android:exported="true" />
+        <activity
             android:name=".NewVisit"
             android:exported="false" />
         <activity
@@ -36,7 +39,6 @@
         <activity android:name=".ChangePassword" />
         <activity android:name=".Menu" />
         <activity android:name=".Right" />
-
 
         <meta-data
             android:name="preloaded_fonts"

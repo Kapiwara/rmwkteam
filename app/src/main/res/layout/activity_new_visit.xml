@@ -2,17 +2,20 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/main_theme_background_gradient"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/choose_date_btn"
+        app:layout_constraintTop_toBottomOf="@+id/textView_header">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -27,84 +30,110 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="Haircut" />
-
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Haircut"
+                    android:textSize="20sp" />
 
 
                 <CheckBox
                     android:id="@+id/checkBox_women_haircut"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp"
+                    tools:text="abcde" />
 
                 <CheckBox
                     android:id="@+id/checkBox_men_haircut"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textView_hair_coloring"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hair coloring" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Hair coloring"
+                    android:textSize="20sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox_coloring_and_haircut"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox_coloring_more_than_1_color"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox_decolorization"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textView_hair_care"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Hair care" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Hair care"
+                    android:textSize="20sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox_hair_care_treatments"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox_washing_and_hair_styling"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/textView_other"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Other" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Other"
+                    android:textSize="20sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox_fringe_trimming"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp" />
 
                 <CheckBox
                     android:id="@+id/checkBox_beard_trimming"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="" />
+                    android:fontFamily="@font/lato_bold"
+                    android:text=""
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
@@ -120,16 +149,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="23dp"
-                    android:text="Pricing" />
-
-
-
+                    android:fontFamily="@font/lato_bold"
+                    android:text="Pricing"
+                    android:textSize="20sp" />
 
 
                 <TextView
                     android:id="@+id/textView_women_haircut_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="30dp"
                     android:text="" />
 
@@ -137,6 +167,8 @@
                     android:id="@+id/textView_men_haircut_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="55dp"
                     android:text="" />
 
@@ -144,6 +176,8 @@
                     android:id="@+id/textView_coloring_and_haircut_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="30dp"
                     android:text="" />
 
@@ -151,6 +185,8 @@
                     android:id="@+id/textView_coloring_more_than_1_color_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="30dp"
                     android:text="" />
 
@@ -158,6 +194,8 @@
                     android:id="@+id/textView_decolorization_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="55dp"
                     android:text="" />
 
@@ -165,6 +203,8 @@
                     android:id="@+id/textView_hair_care_treatments_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="25dp"
                     android:text="" />
 
@@ -172,6 +212,8 @@
                     android:id="@+id/textView_washing_and_hair_styling_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="65dp"
                     android:text="" />
 
@@ -179,6 +221,8 @@
                     android:id="@+id/textView_fringe_trimming_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="25dp"
                     android:text="" />
 
@@ -186,6 +230,8 @@
                     android:id="@+id/textView_beard_trimming_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/lato_bold"
                     android:layout_marginBottom="15dp"
                     android:text="" />
 
@@ -195,13 +241,30 @@
 
     <TextView
         android:id="@+id/textView_header"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
         android:background="@color/white"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
         android:text="Choose services for your new visit"
-        android:textSize="24sp"
+        android:textColor="@color/beige"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/choose_date_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_design_3"
+        android:text="Choose date and time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
