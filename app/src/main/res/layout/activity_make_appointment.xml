@@ -6,32 +6,130 @@
     android:layout_height="match_parent"
     android:background="@drawable/main_theme_background_gradient"
     tools:context=".MakeAppointment">
-    <RelativeLayout
+
+    <TextView
+        android:id="@+id/textview_select_date"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:background="@color/white"
+        android:fontFamily="@font/lato_bold"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:text="Select From Avaliable Hours"
+        android:textColor="@color/beige"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout7"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textview_select_date">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:fontFamily="@font/lato_bold"
+            android:text="You are looking at"
+            android:textColor="@color/white"
+            android:textSize="20dp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/current_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_design_1"
+            android:clickable="true"
+            android:textColor="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/lato_bold"
+                android:text="25.12.2021"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@drawable/ic_baseline_calendar_today_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/hours_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/select_date_btn"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="select date"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <Button
-        android:id="@+id/go_back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/select_date_btn" />
+
+        <Button
+            android:id="@+id/select_date_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="select date"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <Button
+            android:id="@+id/go_back_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="20dp" />
+    </LinearLayout>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

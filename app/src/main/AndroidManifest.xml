@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Barberqueue">
         <activity
+            android:name=".SummaryActivity"
+            android:exported="false" />
+        <activity
             android:name=".MakeAppointment"
             android:exported="true" />
         <activity
