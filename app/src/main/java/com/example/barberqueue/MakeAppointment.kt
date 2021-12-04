@@ -1,26 +1,21 @@
 package com.example.barberqueue
 
-import android.app.Activity
-import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.app.PendingIntent.getActivity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.DatePicker
-import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.get
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import androidx.recyclerview.widget.GridLayoutManager
-
-
+import com.example.barberqueue.adapters.HoursAdapter
 
 
 class MakeAppointment : AppCompatActivity() {
+
+    private var listOfHours = ArrayList<HoursViewModel>()
+    var adapter = HoursAdapter(listOfHours)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_make_appointment)
@@ -61,16 +56,12 @@ class MakeAppointment : AppCompatActivity() {
         val numberOfColumns = 4
         recyclerview.layoutManager = GridLayoutManager(this, numberOfColumns)
         // ArrayList of class ItemsViewModel
-        val data = ArrayList<HoursViewModel>()
 
         // This loop will create 20 Views containing
         // the image with the count of view
         for(i in hoursList){
-            data.add(HoursViewModel(i))
+            listOfHours.add(HoursViewModel(i))
         }
-
-        // This will pass the ArrayList to our Adapter
-        val adapter = HoursAdapter(data)
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter

@@ -1,12 +1,17 @@
-package com.example.barberqueue
+package com.example.barberqueue.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.barberqueue.HoursViewModel
+import com.example.barberqueue.R
 
 class HoursAdapter(private val mList: List<HoursViewModel>) : RecyclerView.Adapter<HoursAdapter.ViewHolder>() {
+
+    private var focusedPos: Int = -1
 
     // create new views
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -19,13 +24,32 @@ class HoursAdapter(private val mList: List<HoursViewModel>) : RecyclerView.Adapt
     }
 
     // binds the list items to a view
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, @SuppressLint("RecyclerView") position: Int) {
 
         val hoursViewModel = mList[position]
 
 
         // sets the text to the textview from our itemHolder class
         holder.textView.text = hoursViewModel.text
+
+        if(focusedPos == -1){
+            holder.itemView.setBackgroundResource(R.drawable.button_design_2)
+        }
+        else{
+            if (focusedPos == position){
+                holder.itemView.setBackgroundResource(R.drawable.button_design_1)
+            }
+            else{
+                holder.itemView.setBackgroundResource(R.drawable.button_design_2)
+            }
+        }
+
+        holder.itemView.setOnClickListener {
+            if(focusedPos != position) {
+                notifyDataSetChanged()
+                focusedPos = position
+            }
+        }
 
     }
 
