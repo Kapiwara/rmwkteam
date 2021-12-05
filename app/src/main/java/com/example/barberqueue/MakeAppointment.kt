@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
@@ -21,10 +22,12 @@ class MakeAppointment : AppCompatActivity() {
         setContentView(R.layout.activity_make_appointment)
 
         val calendar: Calendar = Calendar.getInstance()
-
-        val priceSum = intent.getStringExtra("priceSum")?.toFloat()
-        val timeSum = intent.getStringExtra("timeSum")?.toInt()
+        val priceSum = intent.getStringExtra("priceSum")
+        val timeSum = intent.getStringExtra("timeSum")
+        val chosenServices = intent.getStringArrayExtra("chosenServices")
         var selectedDateTime: String = ""
+
+
 
 
 
@@ -48,7 +51,6 @@ class MakeAppointment : AppCompatActivity() {
 
         val hoursList = listOf("8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00")
 
-
         // getting the recyclerview by its id
         val recyclerview = findViewById<RecyclerView>(R.id.hours_recycler_view)
 
@@ -68,8 +70,27 @@ class MakeAppointment : AppCompatActivity() {
 
 
         findViewById<Button>(R.id.go_back_btn).setOnClickListener { openActivityNewVisit()}
+        findViewById<Button>(R.id.select_date_btn).setOnClickListener{
 
-    }
+
+
+            val intent = Intent (this@MakeAppointment,SummaryActivity::class.java)
+            intent.putExtra("chosenServices", chosenServices)
+            intent.putExtra("priceSum", priceSum)
+            intent.putExtra("timeSum", timeSum)
+            intent.putExtra("selectedDateTime", selectedDateTime)
+
+
+            startActivity(intent)
+            }
+
+
+
+
+
+        }
+
+
 
     private fun openActivityNewVisit() {
         val intent = Intent(this,NewVisit::class.java)

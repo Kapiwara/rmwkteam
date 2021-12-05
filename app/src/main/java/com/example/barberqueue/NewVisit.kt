@@ -8,8 +8,6 @@ import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import com.example.barberqueue.db.Service
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -61,6 +59,7 @@ class NewVisit : AppCompatActivity() {
         val chooseDate: Button = findViewById<Button>(R.id.choose_date_btn)
         var priceSum: Float = 0F
         var timeSum: Int = 0
+        var chosenServices = arrayOf<String>()
 
         val ref = db.collection("Services")
         ref.get().addOnSuccessListener { services ->
@@ -105,51 +104,69 @@ class NewVisit : AppCompatActivity() {
                     if (women.isChecked) {
                         priceSum += womenPrice.text.toString().toFloat()
                         timeSum += servicesList[0].time
+                        chosenServices += "Women's haircut"
                     }
                     if (men.isChecked) {
                         priceSum += menPrice.text.toString().toFloat()
                         timeSum += servicesList[1].time
+                        chosenServices += "Men's haircut"
                     }
                     if (coloring.isChecked) {
                         priceSum += coloringPrice.text.toString().toFloat()
                         timeSum += servicesList[2].time
+                        chosenServices += "Coloring"
                     }
                     if (coloringColors.isChecked) {
                         priceSum += coloringColorsPrice.text.toString().toFloat()
                         timeSum += servicesList[3].time
+                        chosenServices += "Coloring multiple colors"
                     }
                     if (decolorization.isChecked) {
                         priceSum += decolorizationPrice.text.toString().toFloat()
                         timeSum += servicesList[4].time
+                        chosenServices += "Decolorization"
                     }
                     if (hairTreatment.isChecked) {
                         priceSum += hairTreatmentPrice.text.toString().toFloat()
                         timeSum += servicesList[5].time
+                        chosenServices += "Hair care treatments"
                     }
                     if (hairWash.isChecked) {
                         priceSum += hairWashPrice.text.toString().toFloat()
                         timeSum += servicesList[6].time
+                        chosenServices += "Washing and hair styling"
                     }
                     if (fringe.isChecked) {
                         priceSum += fringePrice.text.toString().toFloat()
                         timeSum += servicesList[7].time
+                        chosenServices += "Fringe trimming"
                     }
                     if (beard.isChecked) {
                         priceSum += beardPrice.text.toString().toFloat()
                         timeSum += servicesList[8].time
+                        chosenServices += "Beard trimming"
                     }
 
                     if(priceSum <= 0){
                         Toast.makeText(this, "Please choose at least 1 service", Toast.LENGTH_SHORT).show()
                     }
                     else{
-                        val intent = Intent (this,MakeAppointment::class.java).apply{
-                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        }
-                        intent.putExtra("priceSum", priceSum)
-                        intent.putExtra("timeSum", timeSum)
+                        val intent = Intent (this@NewVisit,MakeAppointment::class.java)
+
+
+
+                        intent.putExtra("chosenServices", chosenServices)
+                        intent.putExtra("priceSum", priceSum.toString())
+                        intent.putExtra("timeSum", timeSum.toString())
+
+
+
+
 
                         startActivity(intent)
+                        }
+
+
                     }
 
 
@@ -159,7 +176,7 @@ class NewVisit : AppCompatActivity() {
 
             }
 
-        }
+
 
 
 
