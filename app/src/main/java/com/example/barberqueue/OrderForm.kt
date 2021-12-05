@@ -1,12 +1,16 @@
 package com.example.barberqueue
 
-data class OrderForm (
-    var date: String? = null,
-    var isAccepted: Boolean = false,
-    var isCanceled: Boolean = false,
-    var isDone: Boolean = false,
-    var price: Int =0,
-    var services: String? = null ,
-    var servicesTime: Int = 0,
-    var userId: String? = null
-)
+import java.io.Serializable
+import java.util.ArrayList
+
+class OrderForm(
+    val date: String? = null,
+    val hour: String? = null,
+    val isAccepted: Boolean = false,
+    val isCanceled: Boolean = false,
+    val isDone: Boolean = false,
+    val price: Float = 0f,
+    val services: ArrayList<SummaryViewModel>? = null,
+    val servicesTime: Int = 0,
+    val userId: String? = null
+): Serializable {}

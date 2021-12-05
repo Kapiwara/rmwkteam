@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.barberqueue.HoursViewModel
 import com.example.barberqueue.R
+import com.example.barberqueue.interfaces.FromMakeAppointmentToSummary
 
-class HoursAdapter(private val mList: List<HoursViewModel>) : RecyclerView.Adapter<HoursAdapter.ViewHolder>() {
+class HoursAdapter(private val mList: List<HoursViewModel>, var action: FromMakeAppointmentToSummary) : RecyclerView.Adapter<HoursAdapter.ViewHolder>() {
 
     private var focusedPos: Int = -1
 
@@ -48,6 +49,7 @@ class HoursAdapter(private val mList: List<HoursViewModel>) : RecyclerView.Adapt
             if(focusedPos != position) {
                 notifyDataSetChanged()
                 focusedPos = position
+                action.getSelectedTime(hoursViewModel.text)
             }
         }
 

@@ -4,18 +4,19 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.barberqueue.adapters.HoursAdapter
+import com.example.barberqueue.interfaces.FromMakeAppointmentToSummary
 
 
-class MakeAppointment : AppCompatActivity() {
+class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
 
     private var listOfHours = ArrayList<HoursViewModel>()
-    var adapter = HoursAdapter(listOfHours)
+    var adapter = HoursAdapter(listOfHours, this)
+    private var selectedHour: String = "0:00"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +26,7 @@ class MakeAppointment : AppCompatActivity() {
         val priceSum = intent.getStringExtra("priceSum")
         val timeSum = intent.getStringExtra("timeSum")
         val chosenServices = intent.getStringArrayExtra("chosenServices")
-        var selectedDateTime: String = ""
-
-
-
-
+        var selectedDate: String = ""
 
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
@@ -39,7 +36,7 @@ class MakeAppointment : AppCompatActivity() {
             this,
             {_, _year, _month, _dayOfMonth ->
                 val dateString = "$_dayOfMonth.$_month.$_year"
-                selectedDateTime = dateString
+                selectedDate = dateString
 
             },
             year,
@@ -72,25 +69,17 @@ class MakeAppointment : AppCompatActivity() {
         findViewById<Button>(R.id.go_back_btn).setOnClickListener { openActivityNewVisit()}
         findViewById<Button>(R.id.select_date_btn).setOnClickListener{
 
-
-
             val intent = Intent (this@MakeAppointment,SummaryActivity::class.java)
             intent.putExtra("chosenServices", chosenServices)
             intent.putExtra("priceSum", priceSum)
             intent.putExtra("timeSum", timeSum)
-            intent.putExtra("selectedDateTime", selectedDateTime)
-
+            intent.putExtra("selectedDate", "$selectedDate")
+            intent.putExtra("selectedHour", "$selectedHour")
 
             startActivity(intent)
+
             }
-
-
-
-
-
         }
-
-
 
     private fun openActivityNewVisit() {
         val intent = Intent(this,NewVisit::class.java)
@@ -100,6 +89,10 @@ class MakeAppointment : AppCompatActivity() {
         super.onBackPressed()
         openActivityNewVisit()
 
+    }
+
+    override fun getSelectedTime(time: String) {
+        selectedHour = time
     }
 
 }
