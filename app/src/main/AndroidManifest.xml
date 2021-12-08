@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Barberqueue">
         <activity
+            android:name=".interfaces.AdminEditContact"
+            android:exported="false" />
+        <activity
+            android:name=".ContactData"
+            android:exported="false" />
+        <activity
             android:name=".SummaryActivity"
             android:exported="false" />
         <activity

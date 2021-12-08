@@ -1,8 +1,10 @@
 package com.example.barberqueue
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.barberqueue.databinding.ActivityAdminPanelBinding
+import com.example.barberqueue.interfaces.AdminEditContact
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -19,5 +21,13 @@ class AdminPanel : AppCompatActivity() {
             Firebase.auth.signOut()
             finish()
         }
+        binding.adminContact.setOnClickListener{
+            openActivityEditContact()
+        }
+    }
+
+    private fun openActivityEditContact() {
+        val intent = Intent(this, AdminEditContact::class.java)
+        startActivity(intent)
     }
 }

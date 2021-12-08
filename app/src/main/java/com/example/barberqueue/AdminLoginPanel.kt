@@ -44,7 +44,7 @@ class AdminLoginPanel : AppCompatActivity() {
                     //credentials:
                     // admin@gmail.com
                     //1234567
-                    if(currentFirebaseUser!!.uid == "t6YSIazMwScSSW4dVgLZgBHiDgH3"){
+                    if(currentFirebaseUser!!.uid == "FYjsiIq28NMw9x8AENvygDBN1TC2"){
                         Toast.makeText(baseContext, "Hello Admin", Toast.LENGTH_SHORT).show()
                         openActivityPanel()
                     }else {

@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val currentFirebaseUser = FirebaseAuth.getInstance().currentUser
 
-                    if(currentFirebaseUser!!.uid == "t6YSIazMwScSSW4dVgLZgBHiDgH3"){
+                    if(currentFirebaseUser!!.uid == "FYjsiIq28NMw9x8AENvygDBN1TC2"){
                         Toast.makeText(baseContext, "To log in as an admin please use a different panel", Toast.LENGTH_LONG).show()
                         Firebase.auth.signOut()
                         finish()
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null) {
-            if(currentUser.uid == "t6YSIazMwScSSW4dVgLZgBHiDgH3"){
+            if(currentUser.uid == "FYjsiIq28NMw9x8AENvygDBN1TC2"){
                 openActivityAdminPanel()
             }else{
                 openActivityUser()

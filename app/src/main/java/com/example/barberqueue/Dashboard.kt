@@ -35,11 +35,18 @@ class Dashboard : AppCompatActivity(){
             Firebase.auth.signOut()
             finish()
         }
+        binding.logo.setOnClickListener{
+            openActivityContact();
+        }
 
 
 
     }
 
+    private fun openActivityContact() {
+        val intent = Intent(this, ContactData::class.java)
+        startActivity(intent)
+    }
 
 
     private fun changingTabs(position: Int) {

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.barberqueue.db.User
 
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -24,6 +25,7 @@ class AccountManagement : AppCompatActivity(){
     private lateinit var binding: AccManagementBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var db: FirebaseFirestore
+
 
     lateinit var obj: User
 
