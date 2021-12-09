@@ -24,10 +24,19 @@ class AdminPanel : AppCompatActivity() {
         binding.adminContact.setOnClickListener{
             openActivityEditContact()
         }
+
+        binding.calendarMenagementBtn.setOnClickListener {
+            openActivityCalendarMenagement()
+        }
     }
 
     private fun openActivityEditContact() {
         val intent = Intent(this, AdminEditContact::class.java)
+        startActivity(intent)
+    }
+
+    private fun openActivityCalendarMenagement() {
+        val intent = Intent(this, CalendarManagementActivity::class.java)
         startActivity(intent)
     }
 }

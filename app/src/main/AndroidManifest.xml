@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Barberqueue">
         <activity
+            android:name=".CalendarManagementActivity"
+            android:exported="false" />
+        <activity
             android:name=".interfaces.AdminEditContact"
             android:exported="false" />
         <activity
