@@ -21,14 +21,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_main)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //val signupButton = findViewById<Button>(R.id.sign_up_btn)
-        //val loginButton = findViewById<Button>(R.id.log_in_btn)
-        //val loginEmail = findViewById<EditText>(R.id.login_email)
-        //val loginPassword = findViewById<EditText>(R.id.login_password)
-        //val mgmtBtn = findViewById<Button>(R.id.mgmt_btn)
         auth = FirebaseAuth.getInstance()
         binding.signUpBtn.setOnClickListener { openActivityRegistration() }
         binding.mgmtBtn.setOnClickListener { openActivityManage() }

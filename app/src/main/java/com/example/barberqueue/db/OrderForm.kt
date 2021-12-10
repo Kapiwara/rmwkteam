@@ -1,5 +1,6 @@
-package com.example.barberqueue
+package com.example.barberqueue.db
 
+import com.example.barberqueue.SummaryViewModel
 import java.io.Serializable
 import java.util.ArrayList
 
@@ -14,3 +15,4 @@ class OrderForm(
     val servicesTime: Int = 0,
     val userId: String? = null
 ): Serializable {}
+
