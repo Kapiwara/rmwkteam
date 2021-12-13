@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/main_theme_background_gradient"
     android:layout_height="match_parent"
+    android:background="@drawable/main_theme_background_gradient"
     android:orientation="vertical">
 
     <LinearLayout
@@ -85,7 +85,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/appointments_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp">
+
 
         </androidx.recyclerview.widget.RecyclerView>
 
@@ -100,19 +102,14 @@
         android:id="@+id/add_new_visit_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@drawable/button_design_1"
         android:layout_margin="20dp"
-        android:text="+ Add new visit"
-        android:textColor="@color/white"
-        android:textAllCaps="false"
+        android:background="@drawable/button_design_1"
         android:padding="15dp"
-        android:textSize="15dp"/>
-
-
-
-
-
+        android:text="+ Add new visit"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

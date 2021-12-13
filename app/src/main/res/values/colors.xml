@@ -12,5 +12,8 @@
     <color name="light_grey">#D2D5D9</color>
     <color name="dark_grey">#333333</color>
     <color name="cream">#DFAC9B</color>
+    <color name="creamtrans">#33DFAC9B</color>
     <color name="beige">#E48B5B</color>
+    <color name="transparent_white">#33FFFFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

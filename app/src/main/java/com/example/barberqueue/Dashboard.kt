@@ -7,15 +7,17 @@ import android.view.MotionEvent
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.barberqueue.adapters.AppointmentsAdapter
 import com.example.barberqueue.databinding.DashboardBinding
 import com.example.barberqueue.db.OrderForm
+import com.example.barberqueue.interfaces.OrderClickView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 
 
-class Dashboard : AppCompatActivity() {
+class Dashboard : AppCompatActivity(), OrderClickView {
     private var x1: Float = 0F
     private var y1: Float = 0F
     private var x2: Float = 0F
@@ -59,24 +61,29 @@ class Dashboard : AppCompatActivity() {
 
     }
 
+    override fun onClickOrder(order: OrderForm) {
+        intent = Intent(this, ViewAppointment::class.java)
+        startActivity(intent)
+    }
+
     private fun getData() {
         database = FirebaseDatabase.getInstance().getReference("FutureAppointment")
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    Log.w("TAG", "app_added1")
+                    //Log.w("TAG", "app_added1")
                     for (appointmentSnapshot in snapshot.children) {
                         val appointment = appointmentSnapshot.getValue(OrderForm::class.java)
                         if (appointment != null) {
                             if (appointment.userId == auth.currentUser?.uid /*oraz data jest w przyszłości lub dzisiejsza*/) {
                                 orderArrayList.add(appointment)
-                                Log.w("TAG", "app_added")
+                                //Log.w("TAG", "app_added")
                             }
                         }
 
                     }
 
-                    binding.appointmentsView.adapter = AppointmentsAdapter(orderArrayList)
+                    binding.appointmentsView.adapter = AppointmentsAdapter(orderArrayList, this@Dashboard)
                 }
             }
 
@@ -160,3 +167,5 @@ class Dashboard : AppCompatActivity() {
 
 
 }
+
+
