@@ -44,7 +44,6 @@ class Dashboard : AppCompatActivity(), OrderClickView {
         binding.logoutBtn.setOnClickListener {
             Firebase.auth.signOut()
             finish()
-            openActivityMainActivity()
         }
         binding.logo.setOnClickListener {
             openActivityContact()

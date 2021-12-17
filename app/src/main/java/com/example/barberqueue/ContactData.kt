@@ -1,5 +1,6 @@
 package com.example.barberqueue
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.barberqueue.databinding.AccManagementBinding
@@ -22,6 +23,7 @@ class ContactData : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityContactDataBinding.inflate(layoutInflater)
+        binding.visitUs.setOnClickListener{ openActivityNewVisit()}
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance();
@@ -32,6 +34,11 @@ class ContactData : AppCompatActivity() {
             binding.adressContact.text=obj.contact_adress
             binding.phoneContact.text=obj.contact_phone
         }
+    }
+
+    private fun openActivityNewVisit() {
+        val intent = Intent(this, NewVisit::class.java)
+        startActivity(intent)
     }
 }
 
