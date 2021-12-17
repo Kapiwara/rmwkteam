@@ -61,8 +61,10 @@ class Dashboard : AppCompatActivity(), OrderClickView {
 
     }
 
-    override fun onClickOrder(order: OrderForm) {
-        intent = Intent(this, ViewAppointment::class.java)
+    override fun onClickOrder(order: OrderForm, position: Int) {
+
+        val intent= Intent(this, ViewAppointment::class.java)
+        intent.putExtra("order", order)
         startActivity(intent)
     }
 

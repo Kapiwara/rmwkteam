@@ -9,5 +9,5 @@ interface FromMakeAppointmentToSummary {
 }
 
 interface OrderClickView{
-    fun onClickOrder(orderForm : OrderForm)
+    fun onClickOrder(orderForm : OrderForm, position: Int)
 }

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.barberqueue.R
-import com.example.barberqueue.adapter
 import com.example.barberqueue.db.OrderForm
 import com.example.barberqueue.interfaces.OrderClickView
 
@@ -28,11 +27,12 @@ class AppointmentsAdapter(
 
     override fun onBindViewHolder(holder: AppointmentsViewHolder, position: Int) {
         val currentItem = appointmentsList[position]
+
         holder.date.text = currentItem.date
         holder.itemView.setBackgroundColor(Color.parseColor("#00ffffff"))
         holder.itemView.setOnClickListener {
 
-            orderClickView.onClickOrder(appointmentsList[position])
+            orderClickView.onClickOrder(appointmentsList[position], holder.bindingAdapterPosition)
 
         }
     }
