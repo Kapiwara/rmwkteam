@@ -62,7 +62,7 @@ class Dashboard : AppCompatActivity(), OrderClickView {
 
     override fun onClickOrder(order: OrderForm, position: Int) {
 
-        val intent= Intent(this, ViewAppointment::class.java)
+        val intent = Intent(this, ViewAppointment::class.java)
         intent.putExtra("order", order)
         startActivity(intent)
     }
@@ -84,7 +84,8 @@ class Dashboard : AppCompatActivity(), OrderClickView {
 
                     }
 
-                    binding.appointmentsView.adapter = AppointmentsAdapter(orderArrayList, this@Dashboard)
+                    binding.appointmentsView.adapter =
+                        AppointmentsAdapter(orderArrayList, this@Dashboard)
                 }
             }
 
@@ -117,7 +118,7 @@ class Dashboard : AppCompatActivity(), OrderClickView {
     }
 
     //funkcja do poruszania sie po ui w poziomie
-    override fun onTouchEvent(touchEvent: MotionEvent): Boolean {
+    /*override fun onTouchEvent(touchEvent: MotionEvent): Boolean {
 
         when (touchEvent.action) {
             MotionEvent.ACTION_DOWN -> {
@@ -130,10 +131,10 @@ class Dashboard : AppCompatActivity(), OrderClickView {
                 x2 = touchEvent.x
                 y2 = touchEvent.y
                 if (x1 < x2 && y1 <= y2 + 100 && y1 >= y2 - 100) {
-                    openActivityMenu()
+                    //openActivityMenu()
                     Log.e("position", "$x1,$y1     $x2,$y2")
                 } else if (x1 > x2 && y1 <= y2 + 100 && y1 >= y2 - 100) {
-                    openActivitySTH()
+                    //openActivitySTH()
                     Log.e("position", "$x1,$y1     $x2,$y2")
                 }
 
@@ -143,7 +144,7 @@ class Dashboard : AppCompatActivity(), OrderClickView {
 
 
         return false
-    }
+    }*/
 
 
     private fun openActivityAccountManagement() {
@@ -151,15 +152,6 @@ class Dashboard : AppCompatActivity(), OrderClickView {
         startActivity(intent)
     }
 
-    private fun openActivityMenu() {
-        val intent = Intent(this, Menu::class.java)
-        startActivity(intent)
-    }
-
-    private fun openActivitySTH() {
-        val intent = Intent(this, Right::class.java)
-        startActivity(intent)
-    }
 
     private fun openActivityNewVisit() {
         val intent = Intent(this, NewVisit::class.java)
@@ -168,5 +160,8 @@ class Dashboard : AppCompatActivity(), OrderClickView {
 
 
 }
+
+
+
 
 

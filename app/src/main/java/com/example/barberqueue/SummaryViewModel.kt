@@ -1,3 +1,5 @@
 package com.example.barberqueue
 
-data class SummaryViewModel(val text: String = "") {}
+import java.io.Serializable
+
+data class SummaryViewModel(val text: String = "") : Serializable {}
