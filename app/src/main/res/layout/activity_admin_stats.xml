@@ -3,14 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".AdminStats">
 
-    <com.github.mikephil.charting.charts.BarChart
-        android:id="@+id/barChart"
-        android:paddingLeft="100px"
-        android:paddingBottom="100px"
-        android:paddingRight="100px"
-        android:paddingTop="100px"
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
