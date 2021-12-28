@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Barberqueue">
         <activity
+            android:name=".AdminStats"
+            android:exported="false" />
+        <activity
             android:name=".CalendarManagementActivity"
             android:exported="false" />
         <activity
