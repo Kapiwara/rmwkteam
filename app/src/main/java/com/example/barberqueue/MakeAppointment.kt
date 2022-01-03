@@ -1,6 +1,7 @@
 package com.example.barberqueue
 
 import android.app.DatePickerDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Binder
 import android.os.Build
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import androidx.recyclerview.widget.GridLayoutManager
@@ -32,7 +34,10 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
     var adapter = HoursAdapter(listOfHours, this)
     private var selectedHour: String = "0:00"
     private lateinit var value: Settings
+    val hoursList = listOf("8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00")
 
+
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -60,13 +65,14 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
             value = it.toObject(Settings::class.java)!!
         }
 
+
         val datePickerDialog = DatePickerDialog(
             this,
             {_, _year, _month, _dayOfMonth ->
                 val dateString = _dayOfMonth.toString() + "." + (_month+1).toString() + "." + _year.toString()
                 selectedDate = dateString
                 binding.selectedDateTextView.text = selectedDate
-                //updateHours(selectedDate)
+                updateHours(_dayOfMonth.toString() + "." + (_month+1).toString() + "." + _year.toString())
 
             },
             year,
@@ -80,9 +86,6 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
             datePickerDialog.datePicker.maxDate = calendar.timeInMillis + (value.further_days * 24 * 60 * 60 * 1000)
             datePickerDialog.show()
         }
-
-
-        val hoursList = listOf("8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00")
 
         // getting the recyclerview by its id
         val recyclerview = findViewById<RecyclerView>(R.id.hours_recycler_view)
@@ -138,29 +141,32 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
     }
 
     fun updateHours(date: String){
-        val ref = FirebaseDatabase.getInstance().getReference("HoursStatus").child("Future").child(date)
+        val ref = FirebaseDatabase.getInstance().getReference("HourStatus").child(date.replace('.','_'))
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 listOfHours.clear()
                 if (dataSnapshot.exists()){
+                    var a: Int = 0
                     for (i in dataSnapshot.children){
-                        val value = i.getValue(HoursViewModel::class.java)
-                        if (value != null && value.free == true) {
-                            listOfHours.add(value)
+                        if (i.value == true) {
+                            listOfHours.add(HoursViewModel(hoursList[a]))
                         }
+                        a += 1
                     }
+
                 }else{
                     val hoursList = listOf("8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00")
                     for(i in hoursList){
                         listOfHours.add(HoursViewModel(i))
                     }
                 }
+                adapter.notifyDataSetChanged()
             }
             override fun onCancelled(databaseError: DatabaseError) {
                 Log.w("TAG", "loadPost:onCancelled", databaseError.toException())
             }
         }
-        ref.addValueEventListener(postListener)
+        ref.addListenerForSingleValueEvent(postListener)
     }
 
 }

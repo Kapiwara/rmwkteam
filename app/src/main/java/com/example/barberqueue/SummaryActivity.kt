@@ -13,16 +13,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.barberqueue.adapters.SummaryAdapter
 import com.example.barberqueue.db.OrderForm
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import java.util.ArrayList
+import kotlin.math.ceil
 
 private var listOfSummaryServices = ArrayList<SummaryViewModel>()
+
 var adapter = SummaryAdapter(listOfSummaryServices)
 
 class SummaryActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var newAppointment: OrderForm
+    var selectedHourId: Int = 0
+    var additionalHoursAmount: Int = 0
+    val hoursList = listOf("8:00","8:30","9:00","9:30","10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30","18:00")
+    var hoursBooleanList = listOf(true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true)
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,11 +46,19 @@ class SummaryActivity : AppCompatActivity() {
         val selectedDate = intent.getStringExtra("selectedDate")
         val selectedHour = intent.getStringExtra("selectedHour")
 
+        for ((id, value) in hoursList.withIndex()){
+            if (value == selectedHour){
+                selectedHourId = id
+            }
+        }
 
-
+        if (timeSum != null) {
+            if (timeSum > 30){
+                additionalHoursAmount = ceil(timeSum.div(30).toFloat()).toInt()
+            }
+        }
 
         val recyclerview = findViewById<RecyclerView>(R.id.textView_details_services)
-
 
         if (chosenServices != null) {
             for(i in chosenServices){
@@ -49,7 +66,6 @@ class SummaryActivity : AppCompatActivity() {
                 Log.e("Item", i.toString())
             }
         }
-
 
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = adapter
@@ -62,6 +78,19 @@ class SummaryActivity : AppCompatActivity() {
             if (priceSum != null && timeSum != null){
                 newAppointment = OrderForm(selectedDate,selectedHour,false,false,false, priceSum, listOfSummaryServices, timeSum, auth.currentUser?.uid)
 
+                FirebaseDatabase.getInstance().getReference("HourStatus").addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        if (!snapshot.child(newAppointment.date.toString().replace('.','_')).exists()){
+                            FirebaseDatabase.getInstance().getReference("HourStatus").child(newAppointment.date.toString().replace('.','_')).setValue(hoursBooleanList)
+                        }
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
+
                 val ref = FirebaseDatabase.getInstance().getReference("FutureAppointment")
                 val newRef = ref.push()
                 val key = newRef.key
@@ -70,6 +99,21 @@ class SummaryActivity : AppCompatActivity() {
                     ref.child(key).setValue(newAppointment).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Booking successful.", Toast.LENGTH_LONG).show()
+
+                            FirebaseDatabase.getInstance().getReference("HourStatus").child(newAppointment.date.toString().replace('.','_')).child(
+                                selectedHourId.toString()
+                            ).setValue(false)
+
+                            if (additionalHoursAmount > 0){
+                                for (i in 1 until  additionalHoursAmount){
+                                    if (selectedHourId+i < 21){
+                                        FirebaseDatabase.getInstance().getReference("HourStatus").child(newAppointment.date.toString().replace('.','_')).child(
+                                            (selectedHourId+i).toString()
+                                        ).setValue(false)
+                                    }
+                                }
+                            }
+
                             val intent = Intent(this,Dashboard::class.java)
                             startActivity(intent)
 
