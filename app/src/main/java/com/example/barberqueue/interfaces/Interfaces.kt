@@ -11,3 +11,7 @@ interface FromMakeAppointmentToSummary {
 interface OrderClickView{
     fun onClickOrder(orderForm : OrderForm, position: Int)
 }
+
+interface AdminOrderClickView{
+    fun onClickOrder(orderForm : OrderForm, position: Int)
+}

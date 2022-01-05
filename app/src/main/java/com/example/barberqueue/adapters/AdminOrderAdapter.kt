@@ -6,18 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.barberqueue.CalendarManagementActivity
 import com.example.barberqueue.Dashboard
 import com.example.barberqueue.R
 import com.example.barberqueue.db.OrderForm
 
-class AppointmentsAdapter(
-    private val appointmentsList: ArrayList<OrderForm>, private val orderClickView: Dashboard
+class AdminOrderAdapter(
+    private val appointmentsList: ArrayList<OrderForm>, private val orderClickView: CalendarManagementActivity
 
 ) :
-    RecyclerView.Adapter<AppointmentsAdapter.AppointmentsViewHolder>() {
+    RecyclerView.Adapter<AdminOrderAdapter.AppointmentsViewHolder>() {
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AppointmentsViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AdminOrderAdapter.AppointmentsViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(
             R.layout.appointments_view_itemview,
             parent, false

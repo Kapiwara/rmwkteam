@@ -96,7 +96,24 @@
 
             </LinearLayout>
 
+
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lato_bold"
+            android:textAlignment="center"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:text="Appointments">
+
+        </TextView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/admin_appointments_view"
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 

@@ -55,8 +55,7 @@
         <activity android:name=".Dashboard" />
         <activity android:name=".AccountManagement" />
         <activity android:name=".ChangePassword" />
-        <activity android:name=".Menu" />
-        <activity android:name=".Right" />
+        <activity android:name=".ViewAppointmentAdmin" />
 
         <meta-data
             android:name="preloaded_fonts"
