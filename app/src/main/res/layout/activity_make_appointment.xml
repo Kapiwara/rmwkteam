@@ -108,26 +108,34 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/select_date_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="select date"
+            android:text="Select date"
+            android:background="@drawable/button_design_2"
             android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="20dp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/go_back_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cancel"
+            android:background="@drawable/button_design_2"
             android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="20dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginRight="20dp" />
     </LinearLayout>
 

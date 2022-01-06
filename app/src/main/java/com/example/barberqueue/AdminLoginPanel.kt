@@ -21,7 +21,7 @@ class AdminLoginPanel : AppCompatActivity() {
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
 
-
+        // pobranie informacji z wypełnionych pól
         binding.logInMgmtBtn.setOnClickListener {
             if(binding.loginEmailMgmt.text.trim().toString().isNotEmpty() || binding.loginPasswordMgmt.text.trim().toString().isNotEmpty()){
                 loginAdmin(binding.loginEmailMgmt.text.trim().toString(),binding.loginPasswordMgmt.text.trim().toString())

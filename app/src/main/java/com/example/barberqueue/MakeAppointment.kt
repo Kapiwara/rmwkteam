@@ -40,7 +40,6 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMakeAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -49,11 +48,13 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
         binding.selectedDateTextView.text = "          "
 
         val calendar: Calendar = Calendar.getInstance()
+        // pobranie dotychczasowych danych o wizycie
         val priceSum = intent.getStringExtra("priceSum")
         val timeSum = intent.getStringExtra("timeSum")
         val chosenServices = intent.getStringArrayExtra("chosenServices")
         var selectedDate: String = ""
 
+        // przypisanie wartości do kalendarza
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
@@ -61,19 +62,21 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
         val ref = db.collection("CalendarManagement").document("settings")
         val ref1 = FirebaseDatabase.getInstance().getReference("HoursStatus").child("Future")
 
+        // pobranie z bazy danych o liczbie dni na które mogą się zapisywać użytkownicy
         ref.get().addOnSuccessListener {
             value = it.toObject(Settings::class.java)!!
         }
 
-
+        // deklaracja kalendarza do wybierania dnia
         val datePickerDialog = DatePickerDialog(
             this,
             {_, _year, _month, _dayOfMonth ->
+                //ciąg operacji które wykonają się po kliknięciu OK na kalendarzu
                 val dateString = _dayOfMonth.toString() + "." + (_month+1).toString() + "." + _year.toString()
                 selectedDate = dateString
                 binding.selectedDateTextView.text = selectedDate
+                // wywołanie funkcji aktualizującej godziny na dany dzień
                 updateHours(_dayOfMonth.toString() + "." + (_month+1).toString() + "." + _year.toString())
-
             },
             year,
             month,
@@ -81,6 +84,7 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
         )
         datePickerDialog.datePicker.minDate = calendar.time.time
 
+        // wyświetlenie kalendarza pod warunkiem że wszystkie dane zostały poprawnie pobrane z bazy
         ref.get().addOnSuccessListener {
             value = it.toObject(Settings::class.java)!!
             datePickerDialog.datePicker.maxDate = calendar.timeInMillis + (value.further_days * 24 * 60 * 60 * 1000)
@@ -104,17 +108,16 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
 
-
-
-
         PropertyChangeSupport(selectedDate).addPropertyChangeListener {
 
         }
 
+        // przypisanie funkcji pod przyciski
         binding.currentData.setOnClickListener { datePickerDialog.show()}
         binding.goBackBtn.setOnClickListener { openActivityNewVisit()}
         binding.selectDateBtn.setOnClickListener{
 
+            // przekazanie danych o wizycie do podsumowania
             val intent = Intent (this@MakeAppointment,SummaryActivity::class.java)
             intent.putExtra("chosenServices", chosenServices)
             intent.putExtra("priceSum", priceSum)
@@ -133,18 +136,19 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
     override fun onBackPressed() {
         super.onBackPressed()
         openActivityNewVisit()
-
     }
 
     override fun getSelectedTime(time: String) {
         selectedHour = time
     }
 
+    // funkcja aktualizująca godziny możliwe do wybrania po zmianie dnia
     fun updateHours(date: String){
         val ref = FirebaseDatabase.getInstance().getReference("HourStatus").child(date.replace('.','_'))
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 listOfHours.clear()
+                // sprawdzenie czy w bazie na dany dzień są już zapisane jakieś wizyty, jeśli nie to aktualizujemy wszyskie godziny z tablicy hoursList
                 if (dataSnapshot.exists()){
                     var a: Int = 0
                     for (i in dataSnapshot.children){

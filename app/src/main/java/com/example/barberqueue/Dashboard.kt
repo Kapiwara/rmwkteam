@@ -1,5 +1,8 @@
 package com.example.barberqueue
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -7,6 +10,8 @@ import android.util.Log
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.barberqueue.adapters.AppointmentsAdapter
 import com.example.barberqueue.databinding.DashboardBinding
@@ -25,6 +30,7 @@ class Dashboard : AppCompatActivity(), OrderClickView {
     private var y1: Float = 0F
     private var x2: Float = 0F
     private var y2: Float = 0F
+    private var notificationId: Int = 0
     private lateinit var database: DatabaseReference
     private lateinit var orderArrayList: ArrayList<OrderForm>
     private lateinit var orderIdArrayList: ArrayList<String>
@@ -105,6 +111,33 @@ class Dashboard : AppCompatActivity(), OrderClickView {
                 Log.w("TAG", "loadPost:onCancelled")
             }
         })
+
+        database.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                val value = snapshot.getValue(OrderForm::class.java)
+                if (value != null) {
+                    Log.e("id", value.userId.toString())
+                }
+                if (value != null) {
+                    if (value.userId == auth.currentUser?.uid){
+                        createNotificationChangeStatusVisit()
+                    }
+                }
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
     }
 
     private fun openActivityMainActivity() {
@@ -115,6 +148,37 @@ class Dashboard : AppCompatActivity(), OrderClickView {
     private fun openActivityContact() {
         val intent = Intent(this, ContactData::class.java)
         startActivity(intent)
+    }
+
+    private fun createNotificationChangeStatusVisit(){
+        val name = "4hair_user_notify_change"
+        val descriptionText = "4hair_user_notify_change"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(name, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        var builder = NotificationCompat.Builder(this, name)
+            .setSmallIcon(R.drawable.ic_logo4hair)
+            .setContentTitle("Status has changed")
+            .setContentText("Check out appointments, because at least one of them has changed status!")
+            .setStyle(
+                NotificationCompat.BigTextStyle()
+                .bigText("Check out appointments, because at least one of them has changed status!"))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(notificationId, builder.build())
+            notificationId.inc()
+        }
     }
 
 

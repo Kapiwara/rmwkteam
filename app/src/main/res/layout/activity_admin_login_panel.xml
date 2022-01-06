@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/lato_bold"
         android:text="Admin Panel"
         android:textColor="@color/white"
@@ -64,9 +64,9 @@
             android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:textColor="@color/grey"
-            android:textColorHint="@color/light_grey"
-            android:textSize="15dp" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -95,9 +95,10 @@
             android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:textColor="@color/grey"
-            android:textColorHint="@color/light_grey"
-            android:textSize="15dp" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:fontFamily="@font/lato_bold"
+            android:textSize="20dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/log_in_mgmt_btn"

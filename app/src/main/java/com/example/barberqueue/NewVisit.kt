@@ -153,15 +153,9 @@ class NewVisit : AppCompatActivity() {
                     else{
                         val intent = Intent (this@NewVisit,MakeAppointment::class.java)
 
-
-
                         intent.putExtra("chosenServices", chosenServices)
                         intent.putExtra("priceSum", priceSum.toString())
                         intent.putExtra("timeSum", timeSum.toString())
-
-
-
-
 
                         startActivity(intent)
                         }
@@ -169,16 +163,9 @@ class NewVisit : AppCompatActivity() {
 
                     }
 
-
-
-
                 }
 
             }
-
-
-
-
 
         women.setOnClickListener {
             if (women.isChecked) {
@@ -240,15 +227,6 @@ class NewVisit : AppCompatActivity() {
                 men.isEnabled = true
             }
         }
-
-
-
-
-
-
-
-
-
 
     }
     override fun onBackPressed() {

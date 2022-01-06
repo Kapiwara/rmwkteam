@@ -15,9 +15,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var binding: ActivityMainBinding
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -34,9 +31,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this,"No blank spaces allowed",Toast.LENGTH_LONG).show()
             }
         }
-
-
-
     }
 
     private fun loginUser(email:String, password:String) {
@@ -76,8 +70,6 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
-
 
     private fun openActivityRegistration() {
         val intent = Intent(this, Registration::class.java)

@@ -81,9 +81,9 @@
             android:paddingTop="10dp"
             android:paddingRight="20dp"
             android:paddingBottom="10dp"
-            android:textColor="@color/grey"
-            android:textColorHint="@color/light_grey"
-            android:textSize="15dp" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -114,9 +114,9 @@
             android:paddingRight="20dp"
 
             android:paddingBottom="10dp"
-            android:textColor="@color/grey"
-            android:textColorHint="@color/light_grey"
-            android:textSize="15dp" />
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:textSize="20dp" />
         <!--
 
         <TextView

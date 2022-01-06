@@ -16,7 +16,7 @@ class AdminPanel : AppCompatActivity() {
         binding = ActivityAdminPanelBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val logoutBtn = findViewById<Button>(R.id.logout_admin_btn)
+        // przyporządkowanie odpowiednich funkcji pod przyciski
         binding.logoutAdminBtn.setOnClickListener{
             Firebase.auth.signOut()
             finish()
@@ -24,7 +24,6 @@ class AdminPanel : AppCompatActivity() {
         binding.adminContact.setOnClickListener{
             openActivityEditContact()
         }
-
         binding.calendarMenagementBtn.setOnClickListener {
             openActivityCalendarMenagement()
         }

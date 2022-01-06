@@ -35,26 +35,26 @@ class AccountManagement : AppCompatActivity(){
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
 
-        //val changePasswordButton = findViewById<Button>(R.id.change_pass_btn)
+        // przypisanie odpowiednich funkcji pod przyciski
         binding.changePassBtn.setOnClickListener{ openActivityChangePassword() }
         binding.changeEmailBtn.setOnClickListener{ openActivityChangeEmail() }
         binding.deleteAccBtn.setOnClickListener { deleteUser() }
         binding.editProfileDataBtn.setOnClickListener{ openDialogChangeProfileData() }
 
 
+        // pobranie z bazy danych informacji o profilu użytkownika
         db = FirebaseFirestore.getInstance()
-
         val ref = auth.currentUser?.let { db.collection("Users").document(it.uid) }
 
+        // wstawienie danych o profilu użytkownika w widoki
         ref?.addSnapshotListener { value, error ->
             obj = value?.toObject(User::class.java)!!
             binding.textViewName.text = obj.name
             binding.textViewPhone.text = obj.phone
         }
-
-
     }
 
+    // funkcja usuwająca konto użytkownika
     private fun deleteUser() {
         val user = FirebaseAuth.getInstance().currentUser
         val dialog = AlertDialog.Builder(this)
@@ -95,8 +95,6 @@ class AccountManagement : AppCompatActivity(){
         val intent = Intent(this, ChangeEmail::class.java)
         startActivity(intent)
     }
-
-
 
     private fun openDialogChangeProfileData() {
         val bottomSheetFragment = DialogEditProfile(obj?.name.toString(), obj?.phone.toString())

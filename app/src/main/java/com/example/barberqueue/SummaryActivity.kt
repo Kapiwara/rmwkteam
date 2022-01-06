@@ -39,19 +39,21 @@ class SummaryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_summary)
         auth = FirebaseAuth.getInstance()
 
-
+        // pobranie wszystkich danych o wizycie z poprzednich okien
         val priceSum = intent.getStringExtra("priceSum")?.toFloat()
         val timeSum = intent.getStringExtra("timeSum")?.toInt()
         val chosenServices = intent.getStringArrayExtra("chosenServices")
         val selectedDate = intent.getStringExtra("selectedDate")
         val selectedHour = intent.getStringExtra("selectedHour")
 
+        //sprawdzenie jaki indeks w tablicy ma wybrana godzina
         for ((id, value) in hoursList.withIndex()){
             if (value == selectedHour){
                 selectedHourId = id
             }
         }
 
+        // sprawdzenie ile następnych godzin należy wykreślić z rezerwowania gdy wizyta jest dłuższa niż 30 min
         if (timeSum != null) {
             if (timeSum > 30){
                 additionalHoursAmount = ceil(timeSum.div(30).toFloat()).toInt()
@@ -60,6 +62,7 @@ class SummaryActivity : AppCompatActivity() {
 
         val recyclerview = findViewById<RecyclerView>(R.id.textView_details_services)
 
+        // wstawienie usług do odpowiedniej tablicy
         if (chosenServices != null) {
             for(i in chosenServices){
                 listOfSummaryServices.add(SummaryViewModel(i))
@@ -67,17 +70,22 @@ class SummaryActivity : AppCompatActivity() {
             }
         }
 
+        // ustwawienie adaptera do wyświetalnia usług w kolumnie
         recyclerview.layoutManager = LinearLayoutManager(this)
         recyclerview.adapter = adapter
 
+        // wstawienie w widoki informacji o wizycie
         findViewById<TextView>(R.id.textView_summary_price).text = priceSum.toString() + " zł"
         findViewById<TextView>(R.id.textView_summary_time).text = timeSum.toString() + " min"
         findViewById<TextView>(R.id.textView_summary_date).text = "$selectedDate   $selectedHour"
 
+        // ciąg wykowywany po kliknięciu guzika odpowiedzialnego za ostateczną rezerwację wizyty
         findViewById<Button>(R.id.book_appointment_btn).setOnClickListener {
             if (priceSum != null && timeSum != null){
+                //zebranie wszystkich informacji o wizycie w jeden obiekt
                 newAppointment = OrderForm(selectedDate,selectedHour,false,false,false, priceSum, listOfSummaryServices, timeSum, auth.currentUser?.uid)
 
+                // sprawdzenie czy dany dzień ma swoją instancję w bazie danych, jeśli nie to taką tworzymy
                 FirebaseDatabase.getInstance().getReference("HourStatus").addListenerForSingleValueEvent(object : ValueEventListener{
                     override fun onDataChange(snapshot: DataSnapshot) {
                         if (!snapshot.child(newAppointment.date.toString().replace('.','_')).exists()){
@@ -86,24 +94,25 @@ class SummaryActivity : AppCompatActivity() {
                     }
 
                     override fun onCancelled(error: DatabaseError) {
-                        TODO("Not yet implemented")
                     }
 
                 })
 
                 val ref = FirebaseDatabase.getInstance().getReference("FutureAppointment")
+                // utworzenie unikatowego klucza dla każdej wizyty
                 val newRef = ref.push()
                 val key = newRef.key
 
                 if (key != null) {
+                    // wstawienie wizyty do bazy danych
                     ref.child(key).setValue(newAppointment).addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             Toast.makeText(this, "Booking successful.", Toast.LENGTH_LONG).show()
 
+                            // okznaczenie zarezerwowanych godzin jako zajęte
                             FirebaseDatabase.getInstance().getReference("HourStatus").child(newAppointment.date.toString().replace('.','_')).child(
                                 selectedHourId.toString()
                             ).setValue(false)
-
                             if (additionalHoursAmount > 0){
                                 for (i in 1 until  additionalHoursAmount){
                                     if (selectedHourId+i < 21){

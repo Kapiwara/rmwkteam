@@ -1,5 +1,8 @@
 package com.example.barberqueue
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +10,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.barberqueue.adapters.AdminOrderAdapter
 import com.example.barberqueue.adapters.AppointmentsAdapter
@@ -30,6 +35,7 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
     private lateinit var orderArrayList: ArrayList<OrderForm>
     private lateinit var orderIdArrayList: ArrayList<String>
     private lateinit var database: DatabaseReference
+    private var notificationId: Int = 0
 
     private lateinit var value: Settings
 
@@ -119,6 +125,26 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
             }
 
         })
+
+        database.addChildEventListener(object : ChildEventListener {
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                createNotificationNewVisit()
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                createNotificationChangeStatusVisit()
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+
+        })
     }
 
     private fun refreshData(value: Settings) {
@@ -128,6 +154,66 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
     private fun saveChangesInDatabase(value: Settings) {
         db.collection("CalendarManagement").document("settings")
             .update(mapOf("further_days" to value.further_days))
+    }
+
+    private fun createNotificationNewVisit(){
+        val name = "4hair_admin_notify_add"
+        val descriptionText = "4hair_admin_notify_add"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(name, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        var builder = NotificationCompat.Builder(this, name)
+            .setSmallIcon(R.drawable.ic_logo4hair)
+            .setContentTitle("New visit")
+            .setContentText("You have new visit to confirm!")
+            .setStyle(NotificationCompat.BigTextStyle()
+                .bigText("You have new visit to confirm!"))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(notificationId, builder.build())
+            notificationId.inc()
+        }
+    }
+
+    private fun createNotificationChangeStatusVisit(){
+        val name = "4hair_admin_notify_change"
+        val descriptionText = "4hair_admin_notify_change"
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(name, name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager =
+                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        var builder = NotificationCompat.Builder(this, name)
+            .setSmallIcon(R.drawable.ic_logo4hair)
+            .setContentTitle("Status has changed")
+            .setContentText("Check out appointments, because at least one of them has changed status!")
+            .setStyle(NotificationCompat.BigTextStyle()
+                .bigText("Check out appointments, because at least one of them has changed status!"))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setAutoCancel(true)
+
+        with(NotificationManagerCompat.from(this)) {
+            notify(notificationId, builder.build())
+            notificationId.inc()
+        }
     }
 
     override fun onClickOrder(orderForm: OrderForm, position: Int) {

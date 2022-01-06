@@ -15,15 +15,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:background="@drawable/layout_background_1"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/linearLayout_services"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
                 android:orientation="vertical">
+
+
 
                 <TextView
                     android:id="@+id/textView_haircut"
@@ -35,23 +39,60 @@
                     android:textSize="20sp" />
 
 
-                <CheckBox
-                    android:id="@+id/checkBox_women_haircut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp"
-                    tools:text="abcde" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <CheckBox
-                    android:id="@+id/checkBox_men_haircut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp" />
+                    <CheckBox
+                        android:id="@+id/checkBox_women_haircut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-" />
+
+                    <TextView
+                        android:id="@+id/textView_women_haircut_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="20dp"
+                        android:text="-" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_men_haircut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-"/>
+
+                    <TextView
+                        android:id="@+id/textView_men_haircut_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="20dp"
+                        android:text="-" />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView_hair_coloring"
@@ -61,30 +102,86 @@
                     android:text="Hair coloring"
                     android:textSize="20sp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox_coloring_and_haircut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <CheckBox
-                    android:id="@+id/checkBox_coloring_more_than_1_color"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp" />
+                    <CheckBox
+                        android:id="@+id/checkBox_coloring_and_haircut"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-" />
 
-                <CheckBox
-                    android:id="@+id/checkBox_decolorization"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/textView_coloring_and_haircut_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="20dp"
+                        android:text="-"  />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_coloring_more_than_1_color"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-" />
+
+                    <TextView
+                        android:id="@+id/textView_coloring_more_than_1_color_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="24dp"
+                        android:text="-"  />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_decolorization"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-"/>
+
+                    <TextView
+                        android:id="@+id/textView_decolorization_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="24dp"
+                        android:text="-"  />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView_hair_care"
@@ -94,22 +191,59 @@
                     android:text="Hair care"
                     android:textSize="20sp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox_hair_care_treatments"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <CheckBox
-                    android:id="@+id/checkBox_washing_and_hair_styling"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp" />
+                    <CheckBox
+                        android:id="@+id/checkBox_hair_care_treatments"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-" />
+
+                    <TextView
+                        android:id="@+id/textView_hair_care_treatments_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="24dp"
+                        android:text="-"  />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_washing_and_hair_styling"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-" />
+
+                    <TextView
+                        android:id="@+id/textView_washing_and_hair_styling_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="24dp"
+                        android:text="-"  />
+
+                </LinearLayout>
 
                 <TextView
                     android:id="@+id/textView_other"
@@ -119,24 +253,86 @@
                     android:text="Other"
                     android:textSize="20sp" />
 
-                <CheckBox
-                    android:id="@+id/checkBox_fringe_trimming"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                <CheckBox
-                    android:id="@+id/checkBox_beard_trimming"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/lato_bold"
-                    android:text=""
-                    android:textSize="15sp" />
+                    <CheckBox
+                        android:id="@+id/checkBox_fringe_trimming"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-" />
+
+                    <TextView
+                        android:id="@+id/textView_fringe_trimming_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="24dp"
+                        android:text="-"  />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <CheckBox
+                        android:id="@+id/checkBox_beard_trimming"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lato_bold"
+                        android:text=""
+                        android:layout_weight="1"
+                        android:textSize="15sp"
+                        tools:text="-" />
+
+                    <TextView
+                        android:id="@+id/textView_beard_trimming_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:textAlignment="textEnd"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/lato_bold"
+                        android:layout_marginBottom="24dp"
+                        android:text="-"  />
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </LinearLayout>
 
+            <!--
             <LinearLayout
                 android:id="@+id/linearLayout_prices"
                 android:layout_width="match_parent"
@@ -154,89 +350,31 @@
                     android:textSize="20sp" />
 
 
-                <TextView
-                    android:id="@+id/textView_women_haircut_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="30dp"
-                    android:text="" />
 
-                <TextView
-                    android:id="@+id/textView_men_haircut_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="55dp"
-                    android:text="" />
 
-                <TextView
-                    android:id="@+id/textView_coloring_and_haircut_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="30dp"
-                    android:text="" />
 
-                <TextView
-                    android:id="@+id/textView_coloring_more_than_1_color_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="30dp"
-                    android:text="" />
 
-                <TextView
-                    android:id="@+id/textView_decolorization_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="55dp"
-                    android:text="" />
 
-                <TextView
-                    android:id="@+id/textView_hair_care_treatments_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="25dp"
-                    android:text="" />
 
-                <TextView
-                    android:id="@+id/textView_washing_and_hair_styling_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="65dp"
-                    android:text="" />
 
-                <TextView
-                    android:id="@+id/textView_fringe_trimming_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="25dp"
-                    android:text="" />
 
-                <TextView
-                    android:id="@+id/textView_beard_trimming_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/lato_bold"
-                    android:layout_marginBottom="15dp"
-                    android:text="" />
+
+
+
+
+
+
+
+
+
+
+
 
             </LinearLayout>
+            -->
         </LinearLayout>
+
+
     </ScrollView>
 
     <TextView
@@ -257,11 +395,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/choose_date_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/button_design_3"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textSize="20dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:background="@drawable/button_design_2"
         android:text="Choose date and time"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

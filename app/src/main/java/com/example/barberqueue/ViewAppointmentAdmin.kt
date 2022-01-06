@@ -78,16 +78,19 @@ class ViewAppointmentAdmin : AppCompatActivity() {
             FirebaseDatabase.getInstance().getReference("FutureAppointment").child(visitid).child("canceled").setValue(true)
 
             //odznaczenie godzin, teraz jako wolne
+            // sprawdzenie id wizyty w tablicy
             for ((id, value) in hoursList.withIndex()) {
                 if (value == visit.hour) {
                     selectedHourId = id
                 }
             }
+            // sprawdzenie ile następnych godzin należy zwolnić
             if (visit.servicesTime != null) {
                 if (visit.servicesTime > 30) {
                     additionalHoursAmount = ceil(visit.servicesTime.div(30).toFloat()).toInt()
                 }
             }
+            // zwalnianie godzin
             FirebaseDatabase.getInstance().getReference("HourStatus")
                 .child(visit.date.toString().replace('.', '_')).child(
                     selectedHourId.toString()
@@ -111,6 +114,7 @@ class ViewAppointmentAdmin : AppCompatActivity() {
 
         }
 
+        // oznaczanie wizyty jako zaakceptowanej
         binding.confirmButton.setOnClickListener {
             visit.isAccepted = true
             FirebaseDatabase.getInstance().getReference("FutureAppointment").child(visitid).child("accepted").setValue(true)
@@ -121,6 +125,7 @@ class ViewAppointmentAdmin : AppCompatActivity() {
 
     }
 
+    // pobranie danych o kliencie
     private fun getClientData(userId: String) {
         val db = FirebaseFirestore.getInstance()
         db.collection("Users").document(userId).addSnapshotListener { snapshot, e ->

@@ -17,9 +17,7 @@ class ChangePassword : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         binding = ChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //val submitPassword = findViewById<Button>(R.id.submit_pass_btn)
         auth = FirebaseAuth.getInstance()
-
 
         binding.submitPassBtn.setOnClickListener {
              changePassword()
@@ -31,8 +29,6 @@ class ChangePassword : AppCompatActivity(){
         val oldPassword = findViewById<EditText>(R.id.old_pass)
         val newPassword = findViewById<EditText>(R.id.change_pass)
         val newPassword2 = findViewById<EditText>(R.id.change_pass_2)
-
-
 
             if(dataValidation(newPassword.text.toString(),newPassword2.text.toString())){
                 val user = auth.currentUser
@@ -57,11 +53,9 @@ class ChangePassword : AppCompatActivity(){
                                     }
                             }
                             else{
-
                                 Toast.makeText(this, "Wrong password", Toast.LENGTH_SHORT).show()
                             }
                         }
-
                 }
                 else{
                     Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
