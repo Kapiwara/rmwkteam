@@ -9,6 +9,7 @@ import com.example.barberqueue.db.OrderForm
 import java.util.ArrayList
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.widget.Toast
 import com.example.barberqueue.databinding.AdminviewAppointmentBinding
 import com.example.barberqueue.db.User
 import com.google.firebase.database.FirebaseDatabase
@@ -50,7 +51,8 @@ class ViewAppointmentAdmin : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = AdminviewAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val visit: OrderForm = intent.getSerializableExtra("order") as OrderForm
+        var visit: OrderForm = intent.getSerializableExtra("order") as OrderForm
+        val visitid: String = intent.getStringExtra("id") as String
         var dateAndHour: String = visit.date + "\t\t\t" + visit.hour
 
         getClientData(visit.userId.toString())
@@ -70,8 +72,10 @@ class ViewAppointmentAdmin : AppCompatActivity() {
         binding.servicesView.text = list
         binding.servicesView.movementMethod = ScrollingMovementMethod()   //just in case
         binding.cancelButton.setOnClickListener {
-            //usuwanie
 
+            //usuwanie
+            visit.isCanceled = true
+            FirebaseDatabase.getInstance().getReference("FutureAppointment").child(visitid).child("canceled").setValue(true)
 
             //odznaczenie godzin, teraz jako wolne
             for ((id, value) in hoursList.withIndex()) {
@@ -86,24 +90,32 @@ class ViewAppointmentAdmin : AppCompatActivity() {
             }
             FirebaseDatabase.getInstance().getReference("HourStatus")
                 .child(visit.date.toString().replace('.', '_')).child(
-                selectedHourId.toString()
-            ).setValue(true)
+                    selectedHourId.toString()
+                ).setValue(true)
             if (additionalHoursAmount > 0) {
                 for (i in 1 until additionalHoursAmount) {
                     if (selectedHourId + i < 21) {
                         FirebaseDatabase.getInstance().getReference("HourStatus")
                             .child(visit.date.toString().replace('.', '_')).child(
-                            (selectedHourId + i).toString()
-                        ).setValue(true)
+                                (selectedHourId + i).toString()
+                            ).setValue(true)
                     }
                 }
-            }
 
+
+            }
             //czy na pewno dialog
 
             //przeniesienie do Dashboard
             openActivityDashboard()
 
+        }
+
+        binding.confirmButton.setOnClickListener {
+            visit.isAccepted = true
+            FirebaseDatabase.getInstance().getReference("FutureAppointment").child(visitid).child("accepted").setValue(true)
+            Toast.makeText(this, "Visit confirmed successfully.", Toast.LENGTH_SHORT).show()
+            openActivityCalendarManagementActivity()
         }
 
 
@@ -133,6 +145,11 @@ class ViewAppointmentAdmin : AppCompatActivity() {
 
     private fun openActivityDashboard() {
         val intent = Intent(this, Dashboard::class.java)
+        startActivity(intent)
+    }
+
+    private fun openActivityCalendarManagementActivity() {
+        val intent = Intent(this, CalendarManagementActivity::class.java)
         startActivity(intent)
     }
 }

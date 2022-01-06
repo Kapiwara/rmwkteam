@@ -23,6 +23,7 @@ class ViewAppointment : AppCompatActivity() {
         binding = ActivityViewAppointmentBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val visit: OrderForm = intent.getSerializableExtra("order") as OrderForm
+        val visitid: String = intent.getStringExtra("id") as String
         var dateAndHour: String = visit.date + "\t\t\t" + visit.hour
         binding.viewDate.text = dateAndHour
         binding.viewPrice.text = visit.price.toString()
@@ -40,7 +41,8 @@ class ViewAppointment : AppCompatActivity() {
         binding.servicesView.movementMethod = ScrollingMovementMethod()   //just in case
         binding.cancelButton.setOnClickListener {
             //usuwanie
-            
+            visit.isCanceled = true
+            FirebaseDatabase.getInstance().getReference("FutureAppointment").child(visitid).child("canceled").setValue(true)
 
             //odznaczenie godzin, teraz jako wolne
             for ((id, value) in hoursList.withIndex()){

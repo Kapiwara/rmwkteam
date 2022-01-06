@@ -7,8 +7,8 @@ import java.util.ArrayList
 class OrderForm(
     val date: String? = null,
     val hour: String? = null,
-    val isAccepted: Boolean = false,
-    val isCanceled: Boolean = false,
+    var isAccepted: Boolean = false,
+    var isCanceled: Boolean = false,
     val isDone: Boolean = false,
     val price: Float = 0f,
     val services: ArrayList<SummaryViewModel>? = null,

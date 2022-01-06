@@ -1,9 +1,11 @@
 package com.example.barberqueue
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.barberqueue.adapters.AppointmentsAdapter
@@ -14,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class Dashboard : AppCompatActivity(), OrderClickView {
@@ -23,9 +27,11 @@ class Dashboard : AppCompatActivity(), OrderClickView {
     private var y2: Float = 0F
     private lateinit var database: DatabaseReference
     private lateinit var orderArrayList: ArrayList<OrderForm>
+    private lateinit var orderIdArrayList: ArrayList<String>
     private lateinit var auth: FirebaseAuth
 
     private lateinit var binding: DashboardBinding
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -36,8 +42,6 @@ class Dashboard : AppCompatActivity(), OrderClickView {
 
         findViewById<Button>(R.id.add_new_visit_btn)
         binding.addNewVisitBtn.setOnClickListener { openActivityNewVisit() }
-
-
 
         binding.accMngBtn.setOnClickListener { openActivityAccountManagement() }
         binding.logoutBtn.setOnClickListener {
@@ -53,6 +57,7 @@ class Dashboard : AppCompatActivity(), OrderClickView {
         binding.appointmentsView.setHasFixedSize(true)
 
         orderArrayList = arrayListOf<OrderForm>()
+        orderIdArrayList = arrayListOf<String>()
 
         getData()
 
@@ -63,24 +68,32 @@ class Dashboard : AppCompatActivity(), OrderClickView {
 
         val intent = Intent(this, ViewAppointment::class.java)
         intent.putExtra("order", order)
+        intent.putExtra("id", orderIdArrayList[position])
         startActivity(intent)
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun getData() {
+
+        val current = LocalDate.now()
+        val formater = DateTimeFormatter.ofPattern("d.M.yyyy")
+
         database = FirebaseDatabase.getInstance().getReference("FutureAppointment")
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                orderArrayList.clear()
+                orderIdArrayList.clear()
                 if (snapshot.exists()) {
                     //Log.w("TAG", "app_added1")
                     for (appointmentSnapshot in snapshot.children) {
                         val appointment = appointmentSnapshot.getValue(OrderForm::class.java)
                         if (appointment != null) {
-                            if (appointment.userId == auth.currentUser?.uid /*oraz data jest w przyszłości lub dzisiejsza*/) {
+                            if (appointment.userId == auth.currentUser?.uid && LocalDate.parse(appointment.date, formater) >= current) {
                                 orderArrayList.add(appointment)
+                                orderIdArrayList.add(appointmentSnapshot.key.toString())
                                 //Log.w("TAG", "app_added")
                             }
                         }
-
                     }
 
                     binding.appointmentsView.adapter =
@@ -91,7 +104,6 @@ class Dashboard : AppCompatActivity(), OrderClickView {
             override fun onCancelled(error: DatabaseError) {
                 Log.w("TAG", "loadPost:onCancelled")
             }
-
         })
     }
 

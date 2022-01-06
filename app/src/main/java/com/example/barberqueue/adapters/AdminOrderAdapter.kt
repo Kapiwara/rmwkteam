@@ -30,11 +30,17 @@ class AdminOrderAdapter(
         val currentItem = appointmentsList[position]
 
         holder.date.text = currentItem.date
+        holder.hour.text = currentItem.hour
+        if (currentItem.isCanceled == true){
+            holder.status.text = "Canceled"
+        }else if (currentItem.isCanceled == false && currentItem.isAccepted == true){
+            holder.status.text = "Confirmed"
+        }else{
+            holder.status.text = "Scheduled"
+        }
         holder.itemView.setBackgroundColor(Color.parseColor("#00ffffff"))
         holder.itemView.setOnClickListener {
-
-            orderClickView.onClickOrder(appointmentsList[position], holder.bindingAdapterPosition)
-
+            orderClickView.onClickOrder(appointmentsList[position],holder.bindingAdapterPosition)
         }
     }
 
@@ -45,6 +51,8 @@ class AdminOrderAdapter(
 
     class AppointmentsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val date: TextView = itemView.findViewById(R.id.appointment_date)
+        val hour: TextView = itemView.findViewById(R.id.appointment_hour)
+        val status: TextView = itemView.findViewById(R.id.appointment_isAccepted)
 
     }
 }

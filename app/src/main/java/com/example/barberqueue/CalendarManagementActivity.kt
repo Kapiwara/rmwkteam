@@ -1,10 +1,12 @@
 package com.example.barberqueue
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.barberqueue.adapters.AdminOrderAdapter
 import com.example.barberqueue.adapters.AppointmentsAdapter
@@ -16,6 +18,9 @@ import com.example.barberqueue.interfaces.OrderClickView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
 
@@ -23,14 +28,18 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
     private lateinit var db: FirebaseFirestore
     private lateinit var binding: ActivityCalendarManagementBinding
     private lateinit var orderArrayList: ArrayList<OrderForm>
+    private lateinit var orderIdArrayList: ArrayList<String>
     private lateinit var database: DatabaseReference
 
     private lateinit var value: Settings
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCalendarManagementBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         value = Settings()
 
@@ -70,21 +79,30 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
         binding.adminAppointmentsView.layoutManager = LinearLayoutManager(this)
         binding.adminAppointmentsView.setHasFixedSize(true)
         orderArrayList = arrayListOf<OrderForm>()
+        orderIdArrayList = arrayListOf<String>()
 
         getData()
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun getData() {
+
+        val current = LocalDate.now()
+        val formater = DateTimeFormatter.ofPattern("d.M.yyyy")
+
         database = FirebaseDatabase.getInstance().getReference("FutureAppointment")
         database.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
+                orderArrayList.clear()
+                orderIdArrayList.clear()
                 if (snapshot.exists()) {
                     //Log.w("TAG", "app_added1")
                     for (appointmentSnapshot in snapshot.children) {
                         val appointment = appointmentSnapshot.getValue(OrderForm::class.java)
-                        if (appointment != null) {
+                        if (appointment != null && LocalDate.parse(appointment.date, formater) >= current) {
                             if (true) {
                                 orderArrayList.add(appointment)
+                                orderIdArrayList.add(appointmentSnapshot.key.toString())
                                 //Log.w("TAG", "app_added")
                             }
                         }
@@ -115,6 +133,7 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
     override fun onClickOrder(orderForm: OrderForm, position: Int) {
         val intent = Intent(this, ViewAppointmentAdmin::class.java)
         intent.putExtra("order", orderForm)
+        intent.putExtra("id", orderIdArrayList[position])
         startActivity(intent)
     }
 }
