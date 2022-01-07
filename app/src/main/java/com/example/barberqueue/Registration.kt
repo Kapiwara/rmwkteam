@@ -24,10 +24,6 @@ class Registration : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = RegistrationBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //val editEmail = findViewById<EditText>(R.id.signup_email)
-        //val editPassword = findViewById<EditText>(R.id.signup_password)
-        //val editPassword2 = findViewById<EditText>(R.id.signup_password_rpt)
-        //val signUpButton= findViewById<Button>(R.id.sign_up_btn1)
         mAuth = FirebaseAuth.getInstance()
 
 
@@ -80,16 +76,7 @@ class Registration : AppCompatActivity() {
                 .show()
         }
     }
-    /*
-    private fun handleRegistration(authResultTask: Task<AuthResult>) {
-        if (authResultTask.isSuccessful && mAuth.currentUser != null) {
-            addUserToDb(mAuth.currentUser!!.email.toString(), mAuth.currentUser!!.uid)
-        } else {
-            Toast.makeText(this, "Error:" + authResultTask.exception, Toast.LENGTH_SHORT).show()
-        }
-    }
 
-     */
 
     private fun  dataValidation(email: String, password: String, passwordRpt : String, name: String, phone: String) : Boolean{
         if(email.isNotEmpty() && password.isNotEmpty() && passwordRpt.isNotEmpty() && name.isNotEmpty() && phone.isNotEmpty()){

@@ -1,13 +1,12 @@
 package com.example.barberqueue
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.barberqueue.adapters.SummaryAdapter
@@ -17,7 +16,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import java.util.ArrayList
+import java.util.*
 import kotlin.math.ceil
 
 private var listOfSummaryServices = ArrayList<SummaryViewModel>()
@@ -66,7 +65,6 @@ class SummaryActivity : AppCompatActivity() {
         if (chosenServices != null) {
             for(i in chosenServices){
                 listOfSummaryServices.add(SummaryViewModel(i))
-                Log.e("Item", i.toString())
             }
         }
 
@@ -123,8 +121,7 @@ class SummaryActivity : AppCompatActivity() {
                                 }
                             }
 
-                            val intent = Intent(this,Dashboard::class.java)
-                            startActivity(intent)
+                            finish()
 
                         } else {
                             Toast.makeText(this, "Booking failed.", Toast.LENGTH_LONG).show()
@@ -135,6 +132,11 @@ class SummaryActivity : AppCompatActivity() {
             else{
                 Toast.makeText(this, "Something went wrong.", Toast.LENGTH_LONG).show()
             }
+
         }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 }

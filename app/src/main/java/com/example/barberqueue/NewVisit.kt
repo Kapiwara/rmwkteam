@@ -16,16 +16,6 @@ class NewVisit : AppCompatActivity() {
 
 
     private lateinit var db: FirebaseFirestore
-    lateinit var women: CheckBox
-    lateinit var men: CheckBox
-    lateinit var coloringHaircut: CheckBox
-    lateinit var coloringColors: CheckBox
-    lateinit var decolorization: CheckBox
-    lateinit var hairTreatment: CheckBox
-    lateinit var hairWash: CheckBox
-    lateinit var fringe: CheckBox
-    lateinit var beard: CheckBox
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -69,7 +59,6 @@ class NewVisit : AppCompatActivity() {
                 for (document in services) {
                     try {
                         servicesList.add(document.toObject(Service::class.java))
-                        Log.e("lista", (document.toObject(Service::class.java).toString()))
                     } catch (error: Exception) {
                         Toast.makeText(
                             this,
@@ -158,6 +147,7 @@ class NewVisit : AppCompatActivity() {
                         intent.putExtra("timeSum", timeSum.toString())
 
                         startActivity(intent)
+                        finish()
                         }
 
 
@@ -229,21 +219,6 @@ class NewVisit : AppCompatActivity() {
         }
 
     }
-    override fun onBackPressed() {
-        super.onBackPressed()
-        openActivityDashboard()
 
-    }
-
-    private fun openActivityDashboard() {
-        val intent = Intent(this,Dashboard::class.java)
-        startActivity(intent)
-    }
 
 }
-
-
-
-
-
-

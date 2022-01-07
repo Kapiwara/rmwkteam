@@ -1,13 +1,13 @@
 package com.example.barberqueue
 
-import android.content.Intent
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.barberqueue.databinding.ActivityViewAppointmentBinding
 import com.example.barberqueue.db.OrderForm
-import java.util.ArrayList
-import android.text.method.ScrollingMovementMethod
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 import kotlin.math.ceil
 
 
@@ -31,55 +31,59 @@ class ViewAppointment : AppCompatActivity() {
 
         if (serviceList != null) {
             val lengthOfList: Int = serviceList.size
-            var a = 0;
+            var a = 0
             while (a < lengthOfList) {
                 list += serviceList.get(a).text + "\n"
-                a++;
+                a++
             }
         }
         binding.servicesView.text = list
         binding.servicesView.movementMethod = ScrollingMovementMethod()   //just in case
         binding.cancelButton.setOnClickListener {
-            //usuwanie
-            visit.isCanceled = true
-            FirebaseDatabase.getInstance().getReference("FutureAppointment").child(visitid).child("canceled").setValue(true)
+            if (visit.isCanceled) {
+                Toast.makeText(this, "Visit already cancelled", Toast.LENGTH_SHORT).show()
+            } else {
+                //usuwanie
+                visit.isCanceled = true
+                visit.isAccepted = false
+                FirebaseDatabase.getInstance().getReference("FutureAppointment").child(visitid)
+                    .child("canceled").setValue(true)
 
-            //odznaczenie godzin, teraz jako wolne
-            for ((id, value) in hoursList.withIndex()){
-                if (value == visit.hour){
-                    selectedHourId = id
-                }
-            }
-            if (visit.servicesTime != null) {
-                if (visit.servicesTime > 30){
-                    additionalHoursAmount = ceil(visit.servicesTime.div(30).toFloat()).toInt()
-                }
-            }
-            FirebaseDatabase.getInstance().getReference("HourStatus").child(visit.date.toString().replace('.','_')).child(
-                selectedHourId.toString()
-            ).setValue(true)
-            if (additionalHoursAmount > 0){
-                for (i in 1 until  additionalHoursAmount){
-                    if (selectedHourId+i < 21){
-                        FirebaseDatabase.getInstance().getReference("HourStatus").child(visit.date.toString().replace('.','_')).child(
-                            (selectedHourId+i).toString()
-                        ).setValue(true)
+                //odznaczenie godzin, teraz jako wolne
+                for ((id, value) in hoursList.withIndex()) {
+                    if (value == visit.hour) {
+                        selectedHourId = id
                     }
                 }
+                if (visit.servicesTime != null) {
+                    if (visit.servicesTime > 30) {
+                        additionalHoursAmount = ceil(visit.servicesTime.div(30).toFloat()).toInt()
+                    }
+                }
+                FirebaseDatabase.getInstance().getReference("HourStatus")
+                    .child(visit.date.toString().replace('.', '_')).child(
+                    selectedHourId.toString()
+                ).setValue(true)
+                if (additionalHoursAmount > 0) {
+                    for (i in 1 until additionalHoursAmount) {
+                        if (selectedHourId + i < 21) {
+                            FirebaseDatabase.getInstance().getReference("HourStatus")
+                                .child(visit.date.toString().replace('.', '_')).child(
+                                (selectedHourId + i).toString()
+                            ).setValue(true)
+                        }
+                    }
+                }
+
+                //czy na pewno dialog
+
+                //przeniesienie do Dashboard
+                finish()
+
             }
 
-            //czy na pewno dialog
-
-            //przeniesienie do Dashboard
-            openActivityDashboard()
-
         }
-
-
     }
 
-    private fun openActivityDashboard() {
-        val intent = Intent(this, Dashboard::class.java)
-        startActivity(intent)
-    }
+
 }

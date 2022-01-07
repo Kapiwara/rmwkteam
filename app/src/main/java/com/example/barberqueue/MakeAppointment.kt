@@ -1,18 +1,15 @@
 package com.example.barberqueue
 
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.content.Intent
-import android.os.Binder
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
+import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.RecyclerView
-import java.util.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.barberqueue.adapters.HoursAdapter
 import com.example.barberqueue.databinding.ActivityMakeAppointmentBinding
 import com.example.barberqueue.db.Settings
@@ -22,8 +19,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import java.beans.PropertyChangeListener
 import java.beans.PropertyChangeSupport
+import java.util.*
 
 
 class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
@@ -114,28 +111,32 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
 
         // przypisanie funkcji pod przyciski
         binding.currentData.setOnClickListener { datePickerDialog.show()}
-        binding.goBackBtn.setOnClickListener { openActivityNewVisit()}
+        binding.goBackBtn.setOnClickListener { finish()}
         binding.selectDateBtn.setOnClickListener{
 
-            // przekazanie danych o wizycie do podsumowania
-            val intent = Intent (this@MakeAppointment,SummaryActivity::class.java)
-            intent.putExtra("chosenServices", chosenServices)
-            intent.putExtra("priceSum", priceSum)
-            intent.putExtra("timeSum", timeSum)
-            intent.putExtra("selectedDate", "$selectedDate")
-            intent.putExtra("selectedHour", "$selectedHour")
+            if(selectedDate.isNotEmpty() and !(selectedHour.contentEquals("0:00"))) {
 
-            startActivity(intent)
+                // przekazanie danych o wizycie do podsumowania
+                val intent = Intent(this@MakeAppointment, SummaryActivity::class.java)
+                intent.putExtra("chosenServices", chosenServices)
+                intent.putExtra("priceSum", priceSum)
+                intent.putExtra("timeSum", timeSum)
+                intent.putExtra("selectedDate", "$selectedDate")
+                intent.putExtra("selectedHour", "$selectedHour")
+
+                startActivity(intent)
+                finish()
+            }
+            else{
+                Toast.makeText(this, "Please choose correct date and time", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
-    private fun openActivityNewVisit() {
-        val intent = Intent(this,NewVisit::class.java)
-        startActivity(intent)
-    }
-    override fun onBackPressed() {
+
+   override fun onBackPressed() {
         super.onBackPressed()
-        openActivityNewVisit()
+        finish()
     }
 
     override fun getSelectedTime(time: String) {

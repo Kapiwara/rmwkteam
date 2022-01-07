@@ -5,26 +5,23 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.barberqueue.adapters.AdminOrderAdapter
-import com.example.barberqueue.adapters.AppointmentsAdapter
 import com.example.barberqueue.databinding.ActivityCalendarManagementBinding
 import com.example.barberqueue.db.OrderForm
 import com.example.barberqueue.db.Settings
 import com.example.barberqueue.interfaces.AdminOrderClickView
-import com.example.barberqueue.interfaces.OrderClickView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
@@ -66,7 +63,7 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
                 value.further_days = value.further_days.dec()
                 refreshData(value)
             } else {
-                Toast.makeText(this, "Can't set up lower value", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Can't set up lower value", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -75,7 +72,7 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
                 value.further_days = value.further_days.inc()
                 refreshData(value)
             } else {
-                Toast.makeText(this, "Can't set up higher value", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Can't set up higher value", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -102,14 +99,12 @@ class CalendarManagementActivity : AppCompatActivity(), AdminOrderClickView{
                 orderArrayList.clear()
                 orderIdArrayList.clear()
                 if (snapshot.exists()) {
-                    //Log.w("TAG", "app_added1")
                     for (appointmentSnapshot in snapshot.children) {
                         val appointment = appointmentSnapshot.getValue(OrderForm::class.java)
                         if (appointment != null && LocalDate.parse(appointment.date, formater) >= current) {
                             if (true) {
                                 orderArrayList.add(appointment)
                                 orderIdArrayList.add(appointmentSnapshot.key.toString())
-                                //Log.w("TAG", "app_added")
                             }
                         }
 

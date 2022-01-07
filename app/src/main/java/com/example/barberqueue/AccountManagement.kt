@@ -1,23 +1,15 @@
 package com.example.barberqueue
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.barberqueue.databinding.AccManagementBinding
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import android.content.DialogInterface
-
-import android.widget.Toast
-
-import com.google.android.gms.tasks.Task
-
-import androidx.annotation.NonNull
-import androidx.appcompat.app.AlertDialog
 import com.example.barberqueue.db.User
-
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.database.DatabaseReference
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -47,8 +39,14 @@ class AccountManagement : AppCompatActivity(){
         val ref = auth.currentUser?.let { db.collection("Users").document(it.uid) }
 
         // wstawienie danych o profilu użytkownika w widoki
+
         ref?.addSnapshotListener { value, error ->
-            obj = value?.toObject(User::class.java)!!
+            if(value == null){
+                obj = User()
+            }
+            else {
+                obj = value?.toObject(User::class.java)!!
+            }
             binding.textViewName.text = obj.name
             binding.textViewPhone.text = obj.phone
         }
@@ -99,6 +97,10 @@ class AccountManagement : AppCompatActivity(){
     private fun openDialogChangeProfileData() {
         val bottomSheetFragment = DialogEditProfile(obj?.name.toString(), obj?.phone.toString())
         bottomSheetFragment.show(supportFragmentManager,"BottomSheetDialog")
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
 }

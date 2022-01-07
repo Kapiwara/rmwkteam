@@ -3,18 +3,18 @@ package com.example.barberqueue
 import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.example.barberqueue.databinding.ActivityViewAppointmentBinding
-import com.example.barberqueue.db.OrderForm
-import java.util.ArrayList
 import android.text.method.ScrollingMovementMethod
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.barberqueue.databinding.AdminviewAppointmentBinding
+import com.example.barberqueue.db.OrderForm
 import com.example.barberqueue.db.User
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import java.util.*
 import kotlin.math.ceil
 
 
@@ -63,14 +63,20 @@ class ViewAppointmentAdmin : AppCompatActivity() {
 
         if (serviceList != null) {
             val lengthOfList: Int = serviceList.size
-            var a = 0;
+            var a = 0
             while (a < lengthOfList) {
                 list += serviceList.get(a).text + "\n"
-                a++;
+                a++
             }
         }
         binding.servicesView.text = list
         binding.servicesView.movementMethod = ScrollingMovementMethod()   //just in case
+        if(visit.isCanceled){
+            binding.cancelButton.visibility = View.INVISIBLE
+        }
+        if(visit.isCanceled && !visit.isAccepted){
+            binding.confirmButton.visibility = View.INVISIBLE
+        }
         binding.cancelButton.setOnClickListener {
 
             //usuwanie
@@ -110,8 +116,12 @@ class ViewAppointmentAdmin : AppCompatActivity() {
             //czy na pewno dialog
 
             //przeniesienie do Dashboard
-            openActivityDashboard()
+            finish()
 
+        }
+
+        if(visit.isAccepted){
+            binding.confirmButton.visibility = View.INVISIBLE
         }
 
         // oznaczanie wizyty jako zaakceptowanej
@@ -119,7 +129,7 @@ class ViewAppointmentAdmin : AppCompatActivity() {
             visit.isAccepted = true
             FirebaseDatabase.getInstance().getReference("FutureAppointment").child(visitid).child("accepted").setValue(true)
             Toast.makeText(this, "Visit confirmed successfully.", Toast.LENGTH_SHORT).show()
-            openActivityCalendarManagementActivity()
+            finish()
         }
 
 

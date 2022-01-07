@@ -18,7 +18,7 @@
         android:gravity="center"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:text="Calendar Menagement"
+        android:text="Calendar Management"
         android:textColor="@color/beige"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"

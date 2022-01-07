@@ -1,18 +1,10 @@
 package com.example.barberqueue
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.annotation.NonNull
-import com.example.barberqueue.databinding.AccManagementBinding
-import com.example.barberqueue.databinding.ActivityAdminLoginPanelBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.example.barberqueue.databinding.ActivityChangeEmailBinding
-import com.example.barberqueue.databinding.ChangeEmailBinding
-import com.example.barberqueue.db.User
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.EmailAuthProvider.getCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -42,11 +34,11 @@ class ChangeEmail : AppCompatActivity() {
                            .addOnCompleteListener{ task ->
                                if (task.isSuccessful){
                                    updateUserEmailToDb(binding.newEmail.getText().toString())
-                                   Toast.makeText(getApplicationContext(),"Email updated", Toast.LENGTH_LONG).show();
-                                   openActivityuserAcc();
+                                   Toast.makeText(getApplicationContext(),"Email updated", Toast.LENGTH_LONG).show()
+                                   openActivityuserAcc()
                                }else{
-                                   Toast.makeText(getApplicationContext(),"Wrong new E-mail format!", Toast.LENGTH_LONG).show();
-                                   openActivityuserAcc();
+                                   Toast.makeText(getApplicationContext(),"Wrong new E-mail format!", Toast.LENGTH_LONG).show()
+                                   openActivityuserAcc()
                                }
                                }
                    }else{

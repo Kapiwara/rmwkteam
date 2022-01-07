@@ -25,7 +25,7 @@ class AdminPanel : AppCompatActivity() {
             openActivityEditContact()
         }
         binding.calendarMenagementBtn.setOnClickListener {
-            openActivityCalendarMenagement()
+            openActivityCalendarManagement()
         }
         binding.adminStats.setOnClickListener{
             openActivityAdminStats()
@@ -42,7 +42,7 @@ class AdminPanel : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun openActivityCalendarMenagement() {
+    private fun openActivityCalendarManagement() {
         val intent = Intent(this, CalendarManagementActivity::class.java)
         startActivity(intent)
     }
