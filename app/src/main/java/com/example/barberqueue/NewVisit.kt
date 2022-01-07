@@ -49,7 +49,7 @@ class NewVisit : AppCompatActivity() {
         val chooseDate: Button = findViewById<Button>(R.id.choose_date_btn)
         var priceSum: Float = 0F
         var timeSum: Int = 0
-        var chosenServices = arrayOf<String>()
+        var chosenServices = arrayListOf<String>()
 
         val ref = db.collection("Services")
         ref.get().addOnSuccessListener { services ->
@@ -90,6 +90,7 @@ class NewVisit : AppCompatActivity() {
 
 
                 chooseDate.setOnClickListener {
+
                     if (women.isChecked) {
                         priceSum += womenPrice.text.toString().toFloat()
                         timeSum += servicesList[0].time

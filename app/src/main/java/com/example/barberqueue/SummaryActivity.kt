@@ -41,7 +41,7 @@ class SummaryActivity : AppCompatActivity() {
         // pobranie wszystkich danych o wizycie z poprzednich okien
         val priceSum = intent.getStringExtra("priceSum")?.toFloat()
         val timeSum = intent.getStringExtra("timeSum")?.toInt()
-        val chosenServices = intent.getStringArrayExtra("chosenServices")
+        val chosenServices = intent.getStringArrayListExtra("chosenServices")
         val selectedDate = intent.getStringExtra("selectedDate")
         val selectedHour = intent.getStringExtra("selectedHour")
 
@@ -63,6 +63,7 @@ class SummaryActivity : AppCompatActivity() {
 
         // wstawienie usług do odpowiedniej tablicy
         if (chosenServices != null) {
+            listOfSummaryServices.clear()
             for(i in chosenServices){
                 listOfSummaryServices.add(SummaryViewModel(i))
             }
@@ -122,6 +123,7 @@ class SummaryActivity : AppCompatActivity() {
                             }
 
                             finish()
+
 
                         } else {
                             Toast.makeText(this, "Booking failed.", Toast.LENGTH_LONG).show()

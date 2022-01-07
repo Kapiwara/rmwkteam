@@ -48,7 +48,7 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
         // pobranie dotychczasowych danych o wizycie
         val priceSum = intent.getStringExtra("priceSum")
         val timeSum = intent.getStringExtra("timeSum")
-        val chosenServices = intent.getStringArrayExtra("chosenServices")
+        val chosenServices = intent.getStringArrayListExtra("chosenServices")
         var selectedDate: String = ""
 
         // przypisanie wartości do kalendarza
@@ -123,6 +123,9 @@ class MakeAppointment : AppCompatActivity(), FromMakeAppointmentToSummary {
                 intent.putExtra("timeSum", timeSum)
                 intent.putExtra("selectedDate", "$selectedDate")
                 intent.putExtra("selectedHour", "$selectedHour")
+
+
+
 
                 startActivity(intent)
                 finish()
